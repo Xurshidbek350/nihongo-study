@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<!-- v3 fixed -->
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>みんなの日本語 — Kundalik mashqlar</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f0f7f0;
+  --surface: #ffffff;
+  --surface2: #f5fbf5;
+  --border: #c8e6c9;
+  --border2: #a5d6a7;
+  --primary: #2e7d32;
+  --primary-light: #43a047;
+  --primary-dark: #1b5e20;
+  --primary-bg: #e8f5e9;
+  --accent: #00897b;
+  --accent-bg: #e0f2f1;
+  --text: #1a2e1a;
+  --text2: #4a6741;
+  --text3: #7a9878;
+  --red: #c62828;
+  --red-bg: #ffebee;
+  --orange: #e65100;
+  --orange-bg: #fff3e0;
+  --gold: #f57f17;
+  --gold-bg: #fffde7;
+  --shadow: 0 2px 8px rgba(46,125,50,0.1);
+  --shadow-md: 0 4px 16px rgba(46,125,50,0.15);
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', 'Noto Sans JP', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* ── HEADER ── */
+.app-header {
+  background: var(--primary-dark);
+  color: white;
+  padding: 0;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+}
+.app-logo {
+  display: flex; align-items: center; gap: 10px;
+}
+.app-logo .jp { font-family: 'Noto Sans JP'; font-size: 1.4rem; font-weight: 700; color: #a5d6a7; }
+.app-logo .uz { font-size: 0.75rem; color: #81c784; letter-spacing: 0.05em; }
+.streak-badge {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.12);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.streak-badge .fire { font-size: 1rem; }
+
+/* Overall progress bar */
+.overall-progress {
+  padding: 8px 20px 10px;
+  background: rgba(0,0,0,0.2);
+}
+.progress-label {
+  display: flex; justify-content: space-between;
+  font-size: 0.7rem; color: #a5d6a7; margin-bottom: 4px;
+}
+.progress-track {
+  height: 6px; background: rgba(255,255,255,0.15);
+  border-radius: 3px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #66bb6a, #26a69a);
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+/* ── NAV TABS ── */
+.nav-tabs {
+  display: flex;
+  background: var(--surface);
+  border-bottom: 2px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-tabs::-webkit-scrollbar { display: none; }
+.nav-tab {
+  flex: none;
+  padding: 12px 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text3);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  white-space: nowrap;
+  transition: all 0.2s;
+  background: none; border-top: none; border-left: none; border-right: none;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.03em;
+}
+.nav-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+.nav-tab:hover:not(.active) { color: var(--primary-light); background: var(--primary-bg); }
+
+/* ── PANELS ── */
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* ── BUGUNGI VAZIFALAS ── */
+.main-content { max-width: 760px; margin: 0 auto; padding: 20px 16px 80px; }
+
+.section-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text3);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  padding-left: 4px;
+}
+
+.day-banner {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--accent) 100%);
+  border-radius: var(--radius);
+  padding: 20px;
+  color: white;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.day-banner::after {
+  content: '学';
+  position: absolute; right: 16px; top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Noto Sans JP';
+  font-size: 5rem;
+  opacity: 0.08;
+  font-weight: 700;
+}
+.day-banner h2 { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+.day-banner p { font-size: 0.8rem; opacity: 0.85; }
+.day-meta { display: flex; gap: 16px; margin-top: 12px; }
+.day-stat { text-align: center; }
+.day-stat .num { font-size: 1.4rem; font-weight: 700; }
+.day-stat .lbl { font-size: 0.65rem; opacity: 0.75; text-transform: uppercase; }
+
+/* Task cards */
+.task-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; }
+.task-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.task-card:hover { border-color: var(--border2); box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.task-card.done { opacity: 0.7; }
+.task-card.done .task-check { background: var(--primary); border-color: var(--primary); color: white; }
+.task-icon {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem;
+  flex-shrink: 0;
+}
+.task-icon.vocab { background: var(--primary-bg); }
+.task-icon.grammar { background: var(--accent-bg); }
+.task-icon.quiz { background: var(--gold-bg); }
+.task-icon.writing { background: var(--orange-bg); }
+.task-info { flex: 1; }
+.task-info h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 2px; }
+.task-info p { font-size: 0.75rem; color: var(--text3); }
+.task-check {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem;
+  color: transparent;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.task-pill {
+  position: absolute; top: 10px; right: 48px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.pill-new { background: var(--red-bg); color: var(--red); }
+.pill-review { background: var(--primary-bg); color: var(--primary); }
+
+/* ── DARS TUZILMASI ── */
+.lesson-select-bar {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.book-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1.5px solid var(--border2);
+  background: var(--surface);
+  color: var(--text2);
+  transition: all 0.2s;
+}
+.book-badge.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+.lesson-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.lesson-btn {
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text2);
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+.lesson-btn:hover { border-color: var(--primary-light); background: var(--primary-bg); color: var(--primary); }
+.lesson-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+.lesson-btn.completed { background: var(--primary-bg); border-color: var(--primary); color: var(--primary); }
+.lesson-btn.completed::after { content: '✓'; font-size: 0.6rem; display: block; }
+.lesson-btn .sub { font-size: 0.55rem; font-weight: 400; opacity: 0.7; margin-top: 1px; }
+
+/* Lesson detail card */
+.lesson-detail {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.lesson-detail-header {
+  background: var(--primary);
+  color: white;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.lesson-detail-header h3 { font-size: 1rem; font-weight: 700; }
+.lesson-detail-header p { font-size: 0.75rem; opacity: 0.85; margin-top: 2px; }
+.lesson-tabs {
+  display: flex;
+  border-bottom: 1.5px solid var(--border);
+  background: var(--surface2);
+}
+.lesson-tab {
+  padding: 10px 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text3);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1.5px;
+  background: none;
+  border-top: none; border-left: none; border-right: none;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s;
+}
+.lesson-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+.lesson-tab-content { padding: 20px; display: none; }
+.lesson-tab-content.active { display: block; }
+
+/* Vocab list */
+.vocab-table { width: 100%; border-collapse: collapse; }
+.vocab-table th {
+  text-align: left;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text3);
+  padding: 0 12px 8px;
+  font-weight: 700;
+}
+.vocab-table td {
+  padding: 10px 12px;
+  font-size: 0.88rem;
+  border-top: 1px solid var(--border);
+}
+.vocab-table tr:hover td { background: var(--surface2); }
+.jp-word { font-family: 'Noto Sans JP'; font-size: 1rem; color: var(--primary-dark); font-weight: 500; }
+.reading { font-size: 0.75rem; color: var(--text3); }
+
+/* Grammar section */
+.grammar-card {
+  background: var(--surface2);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  border-left: 3px solid var(--primary);
+}
+.grammar-card h4 {
+  font-family: 'Noto Sans JP';
+  font-size: 1rem;
+  color: var(--primary-dark);
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+.grammar-card p { font-size: 0.82rem; color: var(--text2); line-height: 1.6; }
+.grammar-example {
+  margin-top: 8px;
+  background: var(--surface);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 0.82rem;
+}
+.grammar-example .jp { font-family: 'Noto Sans JP'; color: var(--primary-dark); }
+.grammar-example .uz { color: var(--text3); font-size: 0.75rem; }
+
+/* ── FLASHCARDS ── */
+.fc-controls { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.fc-filter {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1.5px solid var(--border2);
+  background: var(--surface);
+  color: var(--text2);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Inter', sans-serif;
+}
+.fc-filter.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+.flashcard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.fc-counter { font-size: 0.75rem; color: var(--text3); font-weight: 600; }
+.fc-counter strong { color: var(--text); font-size: 1rem; }
+
+.flashcard-wrap { width: 100%; max-width: 480px; perspective: 1200px; }
+.flashcard {
+  width: 100%; height: 280px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4,0,0.2,1);
+  cursor: pointer;
+}
+.flashcard.flipped { transform: rotateY(180deg); }
+.fc-face {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 28px;
+  background: var(--surface);
+}
+.fc-back {
+  transform: rotateY(180deg);
+  background: linear-gradient(145deg, #1b5e20 0%, #00695c 100%);
+  color: white;
+  border-color: transparent;
+}
+.fc-face .label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text3); margin-bottom: 12px; }
+.fc-back .label { color: rgba(255,255,255,0.6); }
+.fc-face .main-char { font-family: 'Noto Sans JP'; font-size: 3rem; color: var(--primary-dark); margin-bottom: 6px; line-height: 1; font-weight: 700; }
+.fc-back .main-char { color: #a5d6a7; }
+.fc-face .reading { font-size: 0.9rem; color: var(--text3); }
+.fc-back .main-word { font-size: 1.6rem; font-weight: 700; color: white; margin-bottom: 6px; }
+.fc-back .sub-info { font-size: 0.8rem; color: rgba(255,255,255,0.75); text-align: center; line-height: 1.6; }
+.fc-tap-hint { font-size: 0.65rem; color: var(--text3); margin-top: 16px; }
+
+.fc-btns { display: flex; gap: 12px; }
+.fc-btn {
+  padding: 12px 28px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: 'Inter', sans-serif;
+  border: 2px solid;
+}
+.fc-btn.skip { border-color: var(--border2); background: var(--surface); color: var(--text2); }
+.fc-btn.skip:hover { background: var(--surface2); }
+.fc-btn.flip { border-color: var(--primary); background: var(--primary); color: white; }
+.fc-btn.flip:hover { background: var(--primary-dark); }
+.fc-btn.know { border-color: var(--accent); background: var(--accent); color: white; }
+.fc-btn.know:hover { background: #00695c; }
+.fc-btn.bad { border-color: var(--red); background: var(--red-bg); color: var(--red); }
+.fc-btn.bad:hover { background: var(--red); color: white; }
+
+.fc-stats { display: flex; gap: 20px; }
+.fc-stat { text-align: center; }
+.fc-stat .n { font-size: 1.2rem; font-weight: 700; }
+.fc-stat .n.green { color: var(--primary); }
+.fc-stat .n.red { color: var(--red); }
+.fc-stat .l { font-size: 0.65rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* ── QUIZ ── */
+.quiz-wrap { max-width: 540px; margin: 0 auto; }
+.quiz-header { text-align: center; margin-bottom: 20px; }
+.quiz-score-bar { display: flex; justify-content: center; gap: 24px; margin-bottom: 20px; }
+.quiz-score-item { text-align: center; }
+.quiz-score-item .n { font-size: 1.4rem; font-weight: 700; }
+.quiz-score-item .l { font-size: 0.65rem; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; }
+.q-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  padding: 28px 20px 20px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  margin-bottom: 16px;
+}
+.q-type-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text3); margin-bottom: 12px; }
+.q-main { font-family: 'Noto Sans JP'; font-size: 2.8rem; color: var(--primary-dark); font-weight: 700; margin-bottom: 8px; line-height: 1; }
+.q-hint { font-size: 0.8rem; color: var(--text3); }
+.q-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.q-opt {
+  padding: 14px 10px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-align: center;
+  transition: all 0.15s;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+}
+.q-opt:hover:not(:disabled) { border-color: var(--primary); background: var(--primary-bg); color: var(--primary); }
+.q-opt.correct { background: var(--primary); color: white; border-color: var(--primary); }
+.q-opt.wrong { background: var(--red); color: white; border-color: var(--red); }
+.q-opt:disabled { cursor: default; }
+.q-feedback {
+  text-align: center;
+  min-height: 40px;
+  font-size: 0.82rem;
+  color: var(--text3);
+  padding: 10px;
+  border-radius: var(--radius-sm);
+}
+.q-feedback.correct { background: var(--primary-bg); color: var(--primary-dark); }
+.q-feedback.wrong { background: var(--red-bg); color: var(--red); }
+.q-next-btn {
+  display: block; width: 100%;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  background: var(--primary);
+  color: white;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  transition: background 0.15s;
+  margin-top: 12px;
+}
+.q-next-btn:hover { background: var(--primary-dark); }
+
+/* ── GRAMMATIKA ── */
+.grammar-list { display: flex; flex-direction: column; gap: 12px; }
+.gram-item {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.gram-item-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.gram-item-header:hover { background: var(--surface2); }
+.gram-num {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--primary-bg);
+  color: var(--primary);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.gram-title { flex: 1; }
+.gram-title .jp { font-family: 'Noto Sans JP'; font-size: 0.95rem; color: var(--primary-dark); }
+.gram-title .uz { font-size: 0.75rem; color: var(--text3); }
+.gram-arrow { font-size: 0.8rem; color: var(--text3); transition: transform 0.2s; }
+.gram-item.open .gram-arrow { transform: rotate(180deg); }
+.gram-body { display: none; padding: 0 16px 16px; border-top: 1px solid var(--border); }
+.gram-item.open .gram-body { display: block; padding-top: 14px; }
+.gram-body p { font-size: 0.82rem; color: var(--text2); line-height: 1.7; }
+.gram-example-box {
+  background: var(--surface2);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-top: 10px;
+  border-left: 3px solid var(--primary);
+}
+.gram-example-box .jp { font-family: 'Noto Sans JP'; font-size: 0.9rem; color: var(--primary-dark); }
+.gram-example-box .uz { font-size: 0.75rem; color: var(--text3); margin-top: 2px; }
+.gram-lesson-tag {
+  font-size: 0.6rem;
+  background: var(--primary-bg);
+  color: var(--primary);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ── BOTTOM NAV (mobile) ── */
+@media (max-width: 640px) {
+  .nav-tabs { position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; border-top: 1.5px solid var(--border); border-bottom: none; background: white; justify-content: space-around; }
+  .nav-tab { flex: 1; padding: 10px 4px 8px; text-align: center; font-size: 0.65rem; }
+  .main-content { padding-bottom: 70px; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 480px) {
+  .lesson-grid { grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 6px; }
+  .fc-btns { gap: 8px; }
+  .fc-btn { padding: 10px 18px; font-size: 0.75rem; }
+}
+
+.empty-state { text-align: center; padding: 48px 20px; color: var(--text3); }
+.empty-state .emoji { font-size: 2.5rem; margin-bottom: 12px; }
+.empty-state p { font-size: 0.85rem; }
+
+/* Completion animation */
+@keyframes pop { 0% { transform: scale(0.8); opacity: 0; } 80% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
+.task-card.just-done .task-check { animation: pop 0.3s ease forwards; }
+
+.info-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  background: var(--primary-bg);
+  color: var(--primary);
+}
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="header-top">
+    <div class="app-logo">
+      <div>
+        <div class="jp">みんなの日本語</div>
+        <div class="uz">Kundalik takrorlash tizimi</div>
+      </div>
+    </div>
+    <div class="streak-badge">
+      <span class="fire">🔥</span>
+      <span id="streak-num">0</span> kun
+    </div>
+  </div>
+  <div class="overall-progress">
+    <div class="progress-label">
+      <span>Umumiy progress (1–40 dars)</span>
+      <span id="progress-pct">0%</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="nav-tabs">
+  <button class="nav-tab active" onclick="showTab('today')">📅 Bugun</button>
+  <button class="nav-tab" onclick="showTab('lessons')">📖 Darslar</button>
+  <button class="nav-tab" onclick="showTab('flashcards')">⚡ Kartochka</button>
+  <button class="nav-tab" onclick="showTab('quiz')">✦ Viktorina</button>
+  <button class="nav-tab" onclick="showTab('grammar')">文 Grammatika</button>
+</nav>
+
+<!-- ══════════════════════════════════ TODAY ══════════════════════════════════ -->
+<div class="panel active" id="tab-today">
+  <div class="main-content">
+    <div class="day-banner">
+      <h2 id="day-greeting">Xayrli kun! 🌿</h2>
+      <p id="day-subtext">Bugungi mashqlaringizni bajaring</p>
+      <div class="day-meta">
+        <div class="day-stat"><div class="num" id="today-done">0</div><div class="lbl">Bajarildi</div></div>
+        <div class="day-stat"><div class="num" id="today-total">5</div><div class="lbl">Jami vazifa</div></div>
+        <div class="day-stat"><div class="num" id="today-xp">0</div><div class="lbl">XP</div></div>
+      </div>
+    </div>
+
+    <div class="section-title">Bugungi vazifalar</div>
+    <div class="task-grid" id="task-grid"></div>
+
+    <div class="section-title" style="margin-top:8px;">Qaysi darsda ekansiz</div>
+    <div style="background:var(--surface);border-radius:var(--radius);border:1.5px solid var(--border);padding:16px 18px;box-shadow:var(--shadow);">
+      <div style="font-size:0.8rem;color:var(--text3);margin-bottom:10px;">Joriy darsni belgilang:</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;" id="quick-lesson-select"></div>
+    </div>
+
+    <div class="section-title" style="margin-top:20px;">Haftalik jadval</div>
+    <div id="weekly-chart" style="background:var(--surface);border-radius:var(--radius);border:1.5px solid var(--border);padding:16px 18px;box-shadow:var(--shadow);">
+      <div style="display:flex;align-items:flex-end;gap:6px;height:80px;" id="week-bars"></div>
+      <div style="display:flex;gap:6px;margin-top:6px;" id="week-labels" style="font-size:0.65rem;color:var(--text3);"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ LESSONS ══════════════════════════════════ -->
+<div class="panel" id="tab-lessons">
+  <div class="main-content">
+    <div class="lesson-select-bar">
+      <button class="book-badge active" onclick="setBook(1,this)">Kitob 1 (1-25)</button>
+      <button class="book-badge" onclick="setBook(2,this)">Kitob 2 (26-40)</button>
+    </div>
+    <div class="section-title">Darsni tanlang</div>
+    <div class="lesson-grid" id="lesson-grid"></div>
+    <div class="lesson-detail" id="lesson-detail">
+      <div style="text-align:center;padding:48px 20px;color:var(--text3);">
+        <div style="font-size:2rem;margin-bottom:8px;">📖</div>
+        <div style="font-size:0.85rem;">Darsni tanlang</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ FLASHCARDS ══════════════════════════════════ -->
+<div class="panel" id="tab-flashcards">
+  <div class="main-content">
+    <div class="section-title">Soʻz kartochkalari</div>
+    <div class="fc-controls">
+      <button class="fc-filter active" onclick="setFcRange('all',this)">Hammasi (1-40)</button>
+      <button class="fc-filter" onclick="setFcRange('book1',this)">Kitob 1</button>
+      <button class="fc-filter" onclick="setFcRange('book2',this)">Kitob 2</button>
+      <button class="fc-filter" onclick="setFcRange('cur',this)">Joriy dars</button>
+    </div>
+    <div class="flashcard-container">
+      <div class="fc-counter"><strong id="fc-idx">1</strong> / <span id="fc-total">—</span></div>
+      <div class="flashcard-wrap">
+        <div class="flashcard" id="flashcard" onclick="flipFC()">
+          <div class="fc-face">
+            <div class="label">Yaponcha</div>
+            <div class="main-char" id="fc-char">—</div>
+            <div class="reading" id="fc-reading"></div>
+            <div class="fc-tap-hint">Bosing yoki aylanish tugmasi</div>
+          </div>
+          <div class="fc-face fc-back">
+            <div class="label">Oʻzbekcha tarjima</div>
+            <div class="main-word" id="fc-meaning">—</div>
+            <div class="sub-info" id="fc-extra"></div>
+          </div>
+        </div>
+      </div>
+      <div class="fc-btns">
+        <button class="fc-btn bad" onclick="fcAnswer(false)">✕ Bilmadim</button>
+        <button class="fc-btn flip" onclick="flipFC()">↩ Aylanish</button>
+        <button class="fc-btn know" onclick="fcAnswer(true)">✓ Bildim</button>
+      </div>
+      <div class="fc-stats">
+        <div class="fc-stat"><div class="n green" id="fc-know">0</div><div class="l">Bildim</div></div>
+        <div class="fc-stat"><div class="n red" id="fc-unknow">0</div><div class="l">Bilmadim</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ QUIZ ══════════════════════════════════ -->
+<div class="panel" id="tab-quiz">
+  <div class="main-content">
+    <div class="quiz-wrap">
+      <div class="quiz-score-bar">
+        <div class="quiz-score-item"><div class="n" style="color:var(--primary)" id="q-right">0</div><div class="l">Toʻgʻri</div></div>
+        <div class="quiz-score-item"><div class="n" id="q-total">0</div><div class="l">Jami</div></div>
+        <div class="quiz-score-item"><div class="n" style="color:var(--red)" id="q-wrong">0</div><div class="l">Notoʻgʻri</div></div>
+      </div>
+      <div class="q-card">
+        <div class="q-type-label" id="q-type">Soʻzni toping</div>
+        <div class="q-main" id="q-char">—</div>
+        <div class="q-hint" id="q-hint"></div>
+      </div>
+      <div class="q-options" id="q-options"></div>
+      <div class="q-feedback" id="q-feedback">Toʻgʻri javobni tanlang</div>
+      <button class="q-next-btn" id="q-next" style="display:none" onclick="nextQuiz()">Keyingisi →</button>
+      <div style="margin-top:16px;text-align:center;">
+        <button class="fc-filter active" onclick="setQuizRange('all',this)" style="margin:4px;">Hammasi</button>
+        <button class="fc-filter" onclick="setQuizRange('book1',this)" style="margin:4px;">Kitob 1</button>
+        <button class="fc-filter" onclick="setQuizRange('book2',this)" style="margin:4px;">Kitob 2</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════ GRAMMAR ══════════════════════════════════ -->
+<div class="panel" id="tab-grammar">
+  <div class="main-content">
+    <div class="fc-controls" style="margin-bottom:16px;">
+      <button class="fc-filter active" onclick="setGramFilter('all',this)">Barchasi</button>
+      <button class="fc-filter" onclick="setGramFilter('book1',this)">Kitob 1</button>
+      <button class="fc-filter" onclick="setGramFilter('book2',this)">Kitob 2</button>
+    </div>
+    <div class="grammar-list" id="grammar-list"></div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════
+// DATA — Minna no Nihongo 1 & 2 (1-40 dars)
+// ════════════════════════════════════════
+
+const LESSONS = [
+  // ── KITOB 1 ──
+  { n:1, title:"Tanishish", topic:"OT は OT です / じゃありません / か",
+    grammar:[
+      {jp:"OT は OT です", uz:"Mavzu belgisi は — gapning mavzusini belgilaydi", ex:{jp:"わたしは エンジニアです。", uz:"Men muhandisman."}},
+      {jp:"OT じゃ ありません", uz:"Inkor shakli — '...emas'", ex:{jp:"サントスさんは 学生じゃありません。", uz:"Janob Santos talaba emas."}},
+      {jp:"GAP か", uz:"Soʻroq yuklamasi — gap oxiriga qoʻyiladi", ex:{jp:"ミラーさんは アメリカ人ですか。", uz:"Janob Miller amerikalikmi?"}},
+      {jp:"OT も", uz:"'ham' yuklamasi — avvalgi mavzuni takrorlaydi", ex:{jp:"グプタさんも 会社員です。", uz:"Janob Gupta ham firma xodimi."}},
+      {jp:"OT1 の OT2", uz:"'ning' — tegishlilikni bildiradi", ex:{jp:"ミラーさんは IMCの社員です。", uz:"Janob Miller IMC xodimi."}},
+    ],
+    vocab:[
+      {jp:"わたし",r:"watashi",uz:"men"},{jp:"あなた",r:"anata",uz:"siz"},
+      {jp:"せんせい",r:"sensei",uz:"oʻqituvchi"},{jp:"がくせい",r:"gakusei",uz:"talaba"},
+      {jp:"いしゃ",r:"isha",uz:"shifokor"},{jp:"エンジニア",r:"enjinia",uz:"muhandis"},
+      {jp:"だいがく",r:"daigaku",uz:"universitet"},{jp:"はい",r:"hai",uz:"ha"},
+      {jp:"いいえ",r:"iie",uz:"yoʻq"},{jp:"なんさい",r:"nansai",uz:"necha yosh"},
+    ]},
+
+  { n:2, title:"Koʻrsatish olmoshlari", topic:"これ/それ/あれ / この/その/あの",
+    grammar:[
+      {jp:"これ / それ / あれ", uz:"Koʻrsatish olmoshlari: bu (menga yaqin) / u (sizga yaqin) / ana u (ikkalasiga uzoq)", ex:{jp:"それは 辞書ですか。", uz:"U (sizdagi) lugʻatmi?"}},
+      {jp:"この/その/あの OT", uz:"Koʻrsatish sifatdoshlari — otni aniqlab keladi", ex:{jp:"この本はわたしのです。", uz:"Bu kitob meniki."}},
+      {jp:"OT は OT の です", uz:"Tegishlilik — 'meniki, siniki...'", ex:{jp:"これはだれのかばんですか。", uz:"Bu kim sumkasi?"}},
+      {jp:"OT は なん/なに ですか", uz:"'Nima?' soʻrogʻi", ex:{jp:"これは なんですか。", uz:"Bu nima?"}},
+    ],
+    vocab:[
+      {jp:"これ",r:"kore",uz:"bu (menga yaqin)"},{jp:"それ",r:"sore",uz:"u (sizga yaqin)"},
+      {jp:"あれ",r:"are",uz:"ana u"},{jp:"ほん",r:"hon",uz:"kitob"},
+      {jp:"じしょ",r:"jisho",uz:"lugʻat"},{jp:"かばん",r:"kaban",uz:"sumka"},
+      {jp:"とけい",r:"tokei",uz:"soat"},{jp:"なに/なん",r:"nani/nan",uz:"nima"},
+      {jp:"だれ",r:"dare",uz:"kim"},{jp:"いくら",r:"ikura",uz:"qancha"},
+    ]},
+
+  { n:3, title:"Joy olmoshlari", topic:"ここ/そこ/あそこ / OTはどこですか",
+    grammar:[
+      {jp:"ここ / そこ / あそこ", uz:"Joy olmoshlari: bu yer / u yer / ana u yer", ex:{jp:"トイレは あそこです。", uz:"Hojatxona ana u yerda."}},
+      {jp:"OT は どこ ですか", uz:"'Qayerda?' soʻrogʻi", ex:{jp:"郵便局は どこですか。", uz:"Pochta qayerda?"}},
+      {jp:"OT は OT の です", uz:"Joy ifodalash — '...ning yonida'", ex:{jp:"ABCは 3階です。", uz:"ABC 3-qavatda."}},
+    ],
+    vocab:[
+      {jp:"ここ",r:"koko",uz:"bu yer"},{jp:"そこ",r:"soko",uz:"u yer"},
+      {jp:"あそこ",r:"asoko",uz:"ana u yer"},{jp:"どこ",r:"doko",uz:"qayer"},
+      {jp:"こちら",r:"kochira",uz:"bu taraf (hurmat)"},{jp:"きって",r:"kitte",uz:"pochta markasi"},
+      {jp:"はがき",r:"hagaki",uz:"otkritka"},{jp:"たばこ",r:"tabako",uz:"sigaret"},
+      {jp:"うりば",r:"uriba",uz:"savdo boʻlimi"},{jp:"かいだん",r:"kaidan",uz:"zinapoya"},
+    ]},
+
+  { n:4, title:"Vaqt", topic:"Soat / Kunlik jadval / を で に",
+    grammar:[
+      {jp:"今 〜時〜分 です", uz:"Vaqtni ifodalash — 時(soat), 分(daqiqa)", ex:{jp:"今 9時半です。", uz:"Hozir soat 9:30."}},
+      {jp:"OT から OT まで", uz:"'dan ... gacha' — vaqt oraligʻi", ex:{jp:"9時から 5時まで 働きます。", uz:"Soat 9 dan 5 gacha ishlayman."}},
+      {jp:"〜に FEʻL", uz:"Vaqt belgisi に — aniq vaqt bilan ishlatiladi", ex:{jp:"7時に 起きます。", uz:"Soat 7 da turaman."}},
+    ],
+    vocab:[
+      {jp:"おきます",r:"okimasu",uz:"turmoq (uygʻonmoq)"},{jp:"ねます",r:"nemasu",uz:"uxlamoq"},
+      {jp:"はたらきます",r:"hatarakimasu",uz:"ishlamoq"},{jp:"やすみます",r:"yasumimasu",uz:"dam olmoq"},
+      {jp:"べんきょうします",r:"benkyou shimasu",uz:"oʻqimoq"},{jp:"いま",r:"ima",uz:"hozir"},
+      {jp:"〜じ",r:"~ji",uz:"soat ~"},{jp:"〜ふん",r:"~fun",uz:"~daqiqa"},
+      {jp:"はん",r:"han",uz:"yarim"},{jp:"なんじ",r:"nanji",uz:"soat necha"},
+    ]},
+
+  { n:5, title:"Borish/Kelish", topic:"〜へ 行きます/来ます/帰ります",
+    grammar:[
+      {jp:"OT(joy)へ 行きます/来ます/帰ります", uz:"'ga bormoq / kelmoq / qaytmoq' — harakat feʻllari", ex:{jp:"京都へ 行きます。", uz:"Kyotoga boraman."}},
+      {jp:"OT(joy)で FEʻL", uz:"'da' — harakat sodir boʻladigan joy", ex:{jp:"図書館で 本を 読みます。", uz:"Kutubxonada kitob oʻqiyman."}},
+      {jp:"OT(kishi)と FEʻL", uz:"'bilan' — birgalikda bajarish", ex:{jp:"友達と 映画を 見ます。", uz:"Doʻstim bilan film koʻraman."}},
+    ],
+    vocab:[
+      {jp:"いきます",r:"ikimasu",uz:"bormoq"},{jp:"きます",r:"kimasu",uz:"kelmoq"},
+      {jp:"かえります",r:"kaerimasu",uz:"qaytmoq"},{jp:"でんしゃ",r:"densha",uz:"elektr poezd"},
+      {jp:"バス",r:"basu",uz:"avtobus"},{jp:"ひこうき",r:"hikouki",uz:"samolyot"},
+      {jp:"ふね",r:"fune",uz:"kema"},{jp:"あるいて",r:"aruite",uz:"piyoda"},
+      {jp:"ひとり",r:"hitori",uz:"yolgʻiz"},{jp:"ふたり",r:"futari",uz:"ikki kishi"},
+    ]},
+
+  { n:6, title:"Qilmoq/Yemoq/Ichmoq", topic:"〜を FEʻL / 場所で",
+    grammar:[
+      {jp:"OT を FEʻL", uz:"Vositasiz toʻldiruvchi belgisi を", ex:{jp:"朝ご飯を 食べます。", uz:"Nonushta qilaman (yeyapman)."}},
+      {jp:"OT で FEʻL", uz:"'da' — ish-harakat joyi (transport emas)", ex:{jp:"レストランで 食べます。", uz:"Restoranda yeyman."}},
+      {jp:"OT に 乗ります", uz:"Transportga chiqmoq", ex:{jp:"バスに 乗ります。", uz:"Avtobusga chiqaman."}},
+    ],
+    vocab:[
+      {jp:"たべます",r:"tabemasu",uz:"yemoq"},{jp:"のみます",r:"nomimasu",uz:"ichmoq"},
+      {jp:"すいます",r:"suimasu",uz:"chekmoq"},{jp:"みます",r:"mimasu",uz:"koʻrmoq"},
+      {jp:"ききます",r:"kikimasu",uz:"tinglash, soʻrash"},{jp:"よみます",r:"yomimasu",uz:"oʻqimoq"},
+      {jp:"かきます",r:"kakimasu",uz:"yozmoq"},{jp:"かいます",r:"kaimasu",uz:"sotib olmoq"},
+      {jp:"とります",r:"torimasu",uz:"olmoq"},{jp:"ごはん",r:"gohan",uz:"guruch / taom"},
+    ]},
+
+  { n:7, title:"Vosita bilan", topic:"〜で (vosita) / 〜語で 何ですか",
+    grammar:[
+      {jp:"OT(vosita)で FEʻL", uz:"で — qurol yoki vosita bildiradi", ex:{jp:"はしで 食べます。", uz:"Hashi bilan yeyaman."}},
+      {jp:"〜語で 何ですか", uz:"'... tilida nima deyiladi?'", ex:{jp:"日本語で「ありがとう」は ウズベク語で 何ですか。", uz:"Yaponchada 'arigatou' oʻzbekcha nima?"}},
+      {jp:"OT に あげます/もらいます", uz:"'ga bermoq / dan olmoq'", ex:{jp:"ミラーさんに 花を あげました。", uz:"Janob Millerga gul berdim."}},
+    ],
+    vocab:[
+      {jp:"きります",r:"kirimasu",uz:"kesmoq"},{jp:"おくります",r:"okurimasu",uz:"joʻnatmoq"},
+      {jp:"あげます",r:"agemasu",uz:"bermoq"},{jp:"もらいます",r:"moraimasu",uz:"olmoq"},
+      {jp:"かします",r:"kashimasu",uz:"qarzga bermoq"},{jp:"かります",r:"karimasu",uz:"qarzga olmoq"},
+      {jp:"おしえます",r:"oshiemasu",uz:"oʻrgatmoq"},{jp:"ならいます",r:"naraimasu",uz:"oʻrganmoq"},
+      {jp:"はし",r:"hashi",uz:"choʻpcha (hashi)"},{jp:"ペン",r:"pen",uz:"ruchka"},
+    ]},
+
+  { n:8, title:"Sifatlar", topic:"い-sifat / な-sifat / どんな",
+    grammar:[
+      {jp:"い-sifat + です", uz:"い-sifatlar — おおきい, ちいさい, たかい...", ex:{jp:"富士山は 高いです。", uz:"Fuji togʻi baland."}},
+      {jp:"な-sifat + です", uz:"な-sifatlar — きれい, しずか, べんり...", ex:{jp:"ここは にぎやかです。", uz:"Bu yer gavjum."}},
+      {jp:"どんな OT", uz:"'Qanday?' soʻrogʻi sifatdosh bilan", ex:{jp:"どんな 音楽が 好きですか。", uz:"Qanday musiqa yoqadi?"}},
+      {jp:"OT が すきです/きらいです", uz:"'yoqadi / yoqmaydi' — が bilan ishlatiladi", ex:{jp:"私は 日本語が 好きです。", uz:"Men yapon tilini sevaman."}},
+    ],
+    vocab:[
+      {jp:"おおきい",r:"ookii",uz:"katta"},{jp:"ちいさい",r:"chiisai",uz:"kichkina"},
+      {jp:"あたらしい",r:"atarashii",uz:"yangi"},{jp:"ふるい",r:"furui",uz:"eski"},
+      {jp:"きれい",r:"kirei",uz:"chiroyli, toza"},{jp:"しずか",r:"shizuka",uz:"sokin, tinch"},
+      {jp:"にぎやか",r:"nigiyaka",uz:"gavjum"},{jp:"べんり",r:"benri",uz:"qulay"},
+      {jp:"すき",r:"suki",uz:"yaxshi koʻrish"},{jp:"きらい",r:"kirai",uz:"yomon koʻrish"},
+    ]},
+
+  { n:9, title:"Borish/Kelish sababi", topic:"〜に 行きます / OT + あります/います",
+    grammar:[
+      {jp:"OT(maqsad)に 行きます", uz:"'ga ... qilgani bormoq' — niyat bildiradi", ex:{jp:"買い物に 行きます。", uz:"Xarid qilgani boraman."}},
+      {jp:"OT に OT が あります/います", uz:"Mavjudlik — あります (jonsiz) / います (jonli)", ex:{jp:"公園に 子どもが います。", uz:"Bogʻda bolalar bor."}},
+      {jp:"OT は OT(joy) に あります/います", uz:"Joy bildirish — 'OT qayerda'", ex:{jp:"電話は あそこに あります。", uz:"Telefon ana u yerda."}},
+    ],
+    vocab:[
+      {jp:"あります",r:"arimasu",uz:"bor (jonsiz narsa)"},{jp:"います",r:"imasu",uz:"bor (jonli narsa)"},
+      {jp:"うえ",r:"ue",uz:"ustida"},{jp:"した",r:"shita",uz:"ostida"},
+      {jp:"まえ",r:"mae",uz:"oldida"},{jp:"うしろ",r:"ushiro",uz:"orqasida"},
+      {jp:"みぎ",r:"migi",uz:"oʻng"},{jp:"ひだり",r:"hidari",uz:"chap"},
+      {jp:"なか",r:"naka",uz:"ichida"},{jp:"そと",r:"soto",uz:"tashqarida"},
+    ]},
+
+  { n:10, title:"Sanoq", topic:"〜つ/〜枚/〜本 sanoq suffikslari",
+    grammar:[
+      {jp:"〜つ / 〜個 / 〜枚 / 〜本 / 〜杯", uz:"Sanoq suffikslari — narsa turiga qarab", ex:{jp:"りんごを 3つ ください。", uz:"3 ta olma bering."}},
+      {jp:"OT を いくつ ですか", uz:"'Nechta?' soʻrogʻi", ex:{jp:"みかんを いくつ 買いますか。", uz:"Nechta mandarin olasiz?"}},
+      {jp:"〜も / 〜しか", uz:"'... ta ham' / 'faqat ... ta'", ex:{jp:"リンゴが 一つも ありません。", uz:"Hech qanday olma yoʻq."}},
+    ],
+    vocab:[
+      {jp:"ひとつ",r:"hitotsu",uz:"1 ta"},{jp:"ふたつ",r:"futatsu",uz:"2 ta"},
+      {jp:"みっつ",r:"mittsu",uz:"3 ta"},{jp:"よっつ",r:"yottsu",uz:"4 ta"},
+      {jp:"いつつ",r:"itsutsu",uz:"5 ta"},{jp:"〜まい",r:"~mai",uz:"varaq/qogʻoz sanoq"},
+      {jp:"〜ほん",r:"~hon",uz:"uzun narsa sanoq"},{jp:"〜はい",r:"~hai",uz:"idish sanoq"},
+      {jp:"〜だい",r:"~dai",uz:"mashina sanoq"},{jp:"いくつ",r:"ikutsu",uz:"nechta"},
+    ]},
+
+  { n:11, title:"Qilmoq istayman", topic:"〜たい / 〜に 行きたい",
+    grammar:[
+      {jp:"FEʻL たい です", uz:"'Qilmoqchiman / xohlayman'", ex:{jp:"寿司を 食べたいです。", uz:"Sushi yemoqchiман."}},
+      {jp:"FEʻL たく ない です", uz:"'Qilmoqchi emasman'", ex:{jp:"今日は 会社に 行きたくないです。", uz:"Bugun ofisga bormoqchi emasman."}},
+      {jp:"OT が ほしい です", uz:"'OT kerak / olmoqchiman'", ex:{jp:"新しい自転車が ほしいです。", uz:"Yangi velosiped olmoqchiman."}},
+    ],
+    vocab:[
+      {jp:"くに",r:"kuni",uz:"mamlakat"},{jp:"まち",r:"machi",uz:"shahar, koʻcha"},
+      {jp:"ところ",r:"tokoro",uz:"joy"},{jp:"やま",r:"yama",uz:"tog'"},
+      {jp:"うみ",r:"umi",uz:"dengiz"},{jp:"りょこう",r:"ryokou",uz:"sayohat"},
+      {jp:"どこか",r:"dokoka",uz:"biror yerda"},{jp:"なにか",r:"nanika",uz:"biror narsa"},
+      {jp:"もっと",r:"motto",uz:"koʻproq"},{jp:"ゆっくり",r:"yukkuri",uz:"asta, sekin"},
+    ]},
+
+  { n:12, title:"Oʻtgan zamon", topic:"〜ました / 〜ませんでした",
+    grammar:[
+      {jp:"FEʻL ました", uz:"Oʻtgan zamon ijobiy shakli", ex:{jp:"昨日 映画を 見ました。", uz:"Kecha film koʻrdim."}},
+      {jp:"FEʻL ませんでした", uz:"Oʻtgan zamon inkor shakli", ex:{jp:"昨日は 会社に 行きませんでした。", uz:"Kecha ofisga bormadim."}},
+      {jp:"OT は どうでしたか", uz:"'Qanday boʻldi?' — oʻtgan haqida soʻrash", ex:{jp:"旅行は どうでしたか。", uz:"Sayohat qanday boʻldi?"}},
+      {jp:"OT でした / じゃ ありませんでした", uz:"Ot oʻtgan zamon", ex:{jp:"子どものとき、元気でした。", uz:"Bolaligimda sog'-salomat edim."}},
+    ],
+    vocab:[
+      {jp:"きのう",r:"kinou",uz:"kecha"},{jp:"おととい",r:"ototoi",uz:"oʻtgan kuni"},
+      {jp:"せんしゅう",r:"senshuu",uz:"oʻtgan hafta"},{jp:"せんげつ",r:"sengetsu",uz:"oʻtgan oy"},
+      {jp:"きょねん",r:"kyonen",uz:"oʻtgan yil"},{jp:"はじめて",r:"hajimete",uz:"birinchi marta"},
+      {jp:"いちばん",r:"ichiban",uz:"eng, birinchi"},{jp:"どう",r:"dou",uz:"qanday"},
+      {jp:"いかが",r:"ikaga",uz:"qanday (hurmat)"},{jp:"とても",r:"totemo",uz:"juda, gʻoyat"},
+    ]},
+
+  { n:13, title:"Yoqadi/Yoqmaydi", topic:"好き/嫌い/上手/下手 + が",
+    grammar:[
+      {jp:"OT が 好き / 嫌い です", uz:"'yoqadi / yoqmaydi' — が bilan", ex:{jp:"私は 日本語が 好きです。", uz:"Menga yapon tili yoqadi."}},
+      {jp:"OT が 上手 / 下手 です", uz:"'yaxshi / yomon qiladi' — mahorat bildiradi", ex:{jp:"ミラーさんは 日本語が 上手です。", uz:"Janob Miller yaponcha yaxshi biladi."}},
+      {jp:"どんな OT が 好きですか", uz:"'Qanday ... yoqadi?' — qiziqish soʻrash", ex:{jp:"どんな 音楽が 好きですか。", uz:"Qanday musiqa yoqadi?"}},
+    ],
+    vocab:[
+      {jp:"すき",r:"suki",uz:"yaxshi koʻrish"},{jp:"きらい",r:"kirai",uz:"yomon koʻrish"},
+      {jp:"じょうず",r:"jouzu",uz:"mahoratli, yaxshi"},{jp:"へた",r:"heta",uz:"notoʻgʻri, yomon"},
+      {jp:"おんがく",r:"ongaku",uz:"musiqa"},{jp:"スポーツ",r:"supootsu",uz:"sport"},
+      {jp:"りょうり",r:"ryouri",uz:"ovqat pishirish"},{jp:"うた",r:"uta",uz:"qoʻshiq"},
+      {jp:"えいが",r:"eiga",uz:"kino"},{jp:"どんな",r:"donna",uz:"qanday"},
+    ]},
+
+  { n:14, title:"Takliflar", topic:"〜ましょう / 〜ませんか",
+    grammar:[
+      {jp:"FEʻL ましょう", uz:"'... qilaylik' — taklif qilish", ex:{jp:"一緒に 昼ご飯を 食べましょう。", uz:"Birga tushlik qilaylik."}},
+      {jp:"FEʻL ませんか", uz:"'... qilmaymizmi?' — yumshoq taklif", ex:{jp:"映画を 見ませんか。", uz:"Kino koʻrmaymizmi?"}},
+      {jp:"〜ましょうか", uz:"'... qilaymi?' — yordam taklif qilish", ex:{jp:"荷物を 持ちましょうか。", uz:"Yukingizni koʻtaraymi?"}},
+    ],
+    vocab:[
+      {jp:"きます",r:"kimasu",uz:"kiymoq"},{jp:"ぬぎます",r:"nugimasu",uz:"yechmoq"},
+      {jp:"つけます",r:"tsukemasu",uz:"yoqmoq (chiroq)"},{jp:"けします",r:"keshimasu",uz:"oʻchirmoq"},
+      {jp:"あけます",r:"akemasu",uz:"ochmoq"},{jp:"しめます",r:"shimemasu",uz:"yopmoq"},
+      {jp:"もちます",r:"mochimasu",uz:"ushlamoq, koʻtarmoq"},{jp:"いれます",r:"iremasu",uz:"solmoq"},
+      {jp:"ちょっと",r:"chotto",uz:"biroz, sal"},{jp:"もう",r:"mou",uz:"allaqachon, yana"},
+    ]},
+
+  { n:15, title:"Te-shakl", topic:"〜て ください / 〜ています",
+    grammar:[
+      {jp:"FEʻLning て-shakli", uz:"Turli funksiyalarda ishlatiluvchi asosiy shakl", ex:{jp:"食べて → 食べます", uz:"Yemoq feʻlining te-shakli"}},
+      {jp:"FEʻL て ください", uz:"'... qiling' — iltimos/buyruq", ex:{jp:"ここに 名前を 書いて ください。", uz:"Bu yerga ismingizni yozing."}},
+      {jp:"FEʻL て います", uz:"'... qilyapti' — hozirgi davom zamon", ex:{jp:"ミラーさんは 今、電話して います。", uz:"Janob Miller hozir qoʻngʻiroq qilyapti."}},
+    ],
+    vocab:[
+      {jp:"はなします",r:"hanashimasu",uz:"gapirmoq"},{jp:"まちます",r:"machimasu",uz:"kutmoq"},
+      {jp:"かします",r:"kashimasu",uz:"qarzga bermoq"},{jp:"もどります",r:"modorimasu",uz:"qaytmoq"},
+      {jp:"けっこんします",r:"kekkon shimasu",uz:"uylanmoq/turmushga chiqmoq"},
+      {jp:"すんでいます",r:"sunde imasu",uz:"yashayapti"},{jp:"はたらいています",r:"hataraite imasu",uz:"ishlapti"},
+      {jp:"しっています",r:"shitte imasu",uz:"biladi"},{jp:"もっています",r:"motte imasu",uz:"ushlab turibdi"},
+      {jp:"きています",r:"kite imasu",uz:"kiyib turibdi"},
+    ]},
+
+  { n:16, title:"Te-shakl 2", topic:"〜ては いけません / 〜ても いいです",
+    grammar:[
+      {jp:"FEʻL て は いけません", uz:"'... qilmang / qilish mumkin emas' — taqiq", ex:{jp:"ここで たばこを 吸っては いけません。", uz:"Bu yerda chekish mumkin emas."}},
+      {jp:"FEʻL て も いい です", uz:"'... qilsa boʻladi' — ruxsat", ex:{jp:"ここで 写真を 撮っても いいですか。", uz:"Bu yerda suratga tushsa boʻladimi?"}},
+      {jp:"FEʻL て から", uz:"'... qilgandan keyin'", ex:{jp:"手を 洗ってから、食べます。", uz:"Qoʻl yuvgandan keyin yeyaman."}},
+    ],
+    vocab:[
+      {jp:"すいます",r:"suimasu",uz:"(sigaret) chekmoq"},{jp:"のります",r:"norimasu",uz:"(transport) minmoq"},
+      {jp:"うつします",r:"utsushimasu",uz:"koʻchirmoq"},{jp:"はいります",r:"hairimasu",uz:"kirmoq"},
+      {jp:"でます",r:"demasu",uz:"chiqmoq"},{jp:"ぬぎます",r:"nugimasu",uz:"yechmoq"},
+      {jp:"まがります",r:"magarimasu",uz:"burilmoq"},{jp:"わたります",r:"watarimasu",uz:"oʻtmoq"},
+      {jp:"きんえん",r:"kinʻen",uz:"chekish taqiqlangan"},{jp:"しゃしん",r:"shashin",uz:"surat"},
+    ]},
+
+  { n:17, title:"Nai-shakl", topic:"〜なくて も いい / 〜なければ なりません",
+    grammar:[
+      {jp:"FEʻLning ない-shakli", uz:"Oddiy shakl inkor — yozma/soʻzlashuv uslubi", ex:{jp:"食べない / 見ない", uz:"yemaydi / koʻrmaydi"}},
+      {jp:"FEʻL なくても いい です", uz:"'... qilmasdan ham boʻladi'", ex:{jp:"明日は 来なくても いいです。", uz:"Ertaga kelmasdan ham boʻladi."}},
+      {jp:"FEʻL なければ なりません", uz:"'... qilish shart / kerak'", ex:{jp:"薬を 飲まなければ なりません。", uz:"Dori ichish kerak."}},
+    ],
+    vocab:[
+      {jp:"なります",r:"narimasu",uz:"boʻlmoq, aylana"},{jp:"やります",r:"yarimasu",uz:"qilmoq"},
+      {jp:"れんしゅうします",r:"renshuu shimasu",uz:"mashq qilmoq"},
+      {jp:"わすれます",r:"wasuremasu",uz:"unutmoq"},{jp:"おぼえます",r:"oboemasu",uz:"yod olmoq"},
+      {jp:"しゅくだい",r:"shukudai",uz:"uy vazifasi"},{jp:"もんだい",r:"mondai",uz:"masala, muammo"},
+      {jp:"こたえ",r:"kotae",uz:"javob"},{jp:"じゅうしょ",r:"juusho",uz:"manzil"},
+      {jp:"もちろん",r:"mochiron",uz:"albatta"},
+    ]},
+
+  { n:18, title:"Oddiy shakl", topic:"普通形 / 〜と おもいます",
+    grammar:[
+      {jp:"動詞 普通形 (lugʻat shakli)", uz:"Oddiy shakl — yozma/norasmiy gapirishda", ex:{jp:"食べる / 見る / 来る / する", uz:"yemoq / koʻrmoq / kelmoq / qilmoq"}},
+      {jp:"〜と 思います", uz:"'... deb oʻylayman'", ex:{jp:"明日は 雨が 降ると 思います。", uz:"Ertaga yomgʻir yogʻadi deb oʻylayman."}},
+      {jp:"〜と 言っています", uz:"'... deyapti'", ex:{jp:"田中さんは 来ないと 言っています。", uz:"Janob Tanaka kelmayman deyapti."}},
+    ],
+    vocab:[
+      {jp:"おもいます",r:"omoimasu",uz:"oʻylamoq"},{jp:"いいます",r:"iimasu",uz:"demoq"},
+      {jp:"しります",r:"shirimasu",uz:"bilmoq (yangi)"},{jp:"しりません",r:"shirimasen",uz:"bilmayman"},
+      {jp:"ちかごろ",r:"chikagoro",uz:"yaqinda, soʻnggi paytda"},
+      {jp:"いつも",r:"itsumo",uz:"har doim"},{jp:"ときどき",r:"tokidoki",uz:"baʻzan"},
+      {jp:"たまに",r:"tama ni",uz:"kamdan-kam"},{jp:"めったに",r:"metta ni",uz:"deyarli (inkor)"},
+      {jp:"ぜんぜん",r:"zenzen",uz:"umuman (inkor)"},
+    ]},
+
+  { n:19, title:"Kondisional", topic:"〜たら / 〜ば / 〜ても",
+    grammar:[
+      {jp:"FEʻL た-shakli ら", uz:"'agar ... qilsa' — shart bildiradi", ex:{jp:"雨が 降ったら、行きません。", uz:"Yomgʻir yogʻsa, bormayman."}},
+      {jp:"FEʻL て も", uz:"'... qilsa ham' — qaramay", ex:{jp:"雨が 降っても、行きます。", uz:"Yomgʻir yogʻsa ham boraman."}},
+      {jp:"〜前に / 〜後で", uz:"'dan oldin / dan keyin'", ex:{jp:"食べる前に、手を 洗います。", uz:"Yeyishdan oldin qoʻl yuvaman."}},
+    ],
+    vocab:[
+      {jp:"なります",r:"narimasu",uz:"boʻlmoq"},{jp:"かわります",r:"kawarimasu",uz:"oʻzgarmoq"},
+      {jp:"まえ",r:"mae",uz:"oldin"},{jp:"あとで",r:"ato de",uz:"keyin"},
+      {jp:"〜ながら",r:"~nagara",uz:"... qilar ekan (bir vaqtda)"},
+      {jp:"ずっと",r:"zutto",uz:"uzoq vaqt, doim"},{jp:"もうすぐ",r:"mousugu",uz:"yaqinda, hozir"},
+      {jp:"〜てから",r:"~te kara",uz:"... qilgandan keyin"},{jp:"はじめに",r:"hajime ni",uz:"avval, birinchi navbatda"},
+      {jp:"さいごに",r:"saigo ni",uz:"oxirida"},
+    ]},
+
+  { n:20, title:"Passiv/Qoldiruvchi", topic:"〜てしまいました / Passiv shakl",
+    grammar:[
+      {jp:"FEʻL て しまいました", uz:"'... qilib qoʻydim' — afsuslangan holda", ex:{jp:"財布を 忘れて しまいました。", uz:"Hamyonimni unutib qoʻydim."}},
+      {jp:"〜て おきます", uz:"'... qilib qoʻyaman' — oldindan tayyorlash", ex:{jp:"部屋を 掃除して おきます。", uz:"Xonani oldindan tozalab qoʻyaman."}},
+      {jp:"〜て みます", uz:"'sinab koʻraman'", ex:{jp:"着て みます。", uz:"Kiyib koʻraman."}},
+    ],
+    vocab:[
+      {jp:"なくします",r:"nakushimasu",uz:"yoʻqotmoq"},{jp:"わすれます",r:"wasuremasu",uz:"unutmoq"},
+      {jp:"やぶります",r:"yaburimasu",uz:"yirtmoq"},{jp:"よごします",r:"yogoshimasu",uz:"ifloslantirmoq"},
+      {jp:"こわします",r:"kowashimasu",uz:"buzmoq"},{jp:"はこびます",r:"hakobimasu",uz:"tashimoq"},
+      {jp:"ならべます",r:"narabemasu",uz:"terib qoʻymoq"},{jp:"かたづけます",r:"katazukemasu",uz:"yigʻishtirmoq"},
+      {jp:"じゅんびします",r:"junbi shimasu",uz:"tayyorlash"},{jp:"よやくします",r:"yoyaku shimasu",uz:"band qilish"},
+    ]},
+
+  { n:21, title:"Passiv va xohish", topic:"受身形 / 〜てほしい",
+    grammar:[
+      {jp:"Passiv shakl (受身形)", uz:"FEʻL ga れる/られる qoʻshiladi — 'nima boʻldi'", ex:{jp:"先生に 褒められました。", uz:"Oʻqituvchi meni maqtadi."}},
+      {jp:"〜て ほしい です", uz:"'... qilishini xohlayman'", ex:{jp:"もっと 勉強して ほしいです。", uz:"Koʻproq oʻqishingizni xohlayman."}},
+      {jp:"〜てあげます/てもらいます/てくれます", uz:"Berish-olish te-shaklida", ex:{jp:"友達に 手伝って もらいました。", uz:"Doʻstim menga yordam berdi."}},
+    ],
+    vocab:[
+      {jp:"ほめます",r:"homemasu",uz:"maqtamoq"},{jp:"しかります",r:"shkarimasu",uz:"tanbeh bermoq"},
+      {jp:"なぐります",r:"ngurimasu",uz:"urmoq"},{jp:"ふみます",r:"fumimasu",uz:"bosmoq"},
+      {jp:"ぬすみます",r:"nusumimasu",uz:"oʻgʻirlamoq"},{jp:"おこないます",r:"okonaimasu",uz:"oʻtkazmoq"},
+      {jp:"かいぎ",r:"kaigi",uz:"yigʻilish"},{jp:"しゅっちょう",r:"shutchou",uz:"xizmat safari"},
+      {jp:"みんな",r:"minna",uz:"hammasi, barcha"},{jp:"ひとつも",r:"hitotsu mo",uz:"bitta ham (inkor)"},
+    ]},
+
+  { n:22, title:"Kondisional 2", topic:"〜ば / 〜たら / 〜と",
+    grammar:[
+      {jp:"〜ば (shart)", uz:"'agar ... boʻlsa' — shart bildiradi", ex:{jp:"もっと 練習すれば、上手に なります。", uz:"Koʻproq mashq qilsangiz, yaxshilashadi."}},
+      {jp:"〜と (avtomatik natija)", uz:"'... qilsa, avtomatik ravishda ...'", ex:{jp:"この 道を まっすぐ 行くと、駅が あります。", uz:"Bu yoʻldan toʻgʻri borsangiz, stantsiya bor."}},
+      {jp:"〜たら どうですか", uz:"'... qilsangiz qanday boʻladi?' — tavsiya", ex:{jp:"医者に 行ったら どうですか。", uz:"Shifokorga borsangiz qanday boʻladi?"}},
+    ],
+    vocab:[
+      {jp:"さびしい",r:"sabishii",uz:"yolgʻizlikni his qilmoq"},{jp:"かなしい",r:"kanashii",uz:"xafa"},
+      {jp:"うれしい",r:"ureshii",uz:"xursand"},{jp:"おかしい",r:"okashii",uz:"kulgili, gʻalati"},
+      {jp:"こわい",r:"kowai",uz:"qoʻrqinchli"},{jp:"はずかしい",r:"hazukashii",uz:"uyaladigan"},
+      {jp:"かっこいい",r:"kakkoii",uz:"chiroyli (erkak)"},{jp:"もったいない",r:"mottainai",uz:"isrofgarchilik"},
+      {jp:"うんどうします",r:"undou shimasu",uz:"jismoniy mashq qilmoq"},
+      {jp:"ダイエットします",r:"daietto shimasu",uz:"parhezda boʻlmoq"},
+    ]},
+
+  { n:23, title:"Berish/Olish", topic:"あげる/もらう/くれる (oddiy shakl)",
+    grammar:[
+      {jp:"〜て あげます", uz:"'... qilib beraman' — boshqaga nisbatan", ex:{jp:"友達の荷物を 持って あげました。", uz:"Doʻstimning yukini koʻtarib berdim."}},
+      {jp:"〜て もらいます", uz:"'... qilib olaman' — kimdan narsa olish", ex:{jp:"先生に 説明して もらいました。", uz:"Oʻqituvchi menga tushuntirib berdi."}},
+      {jp:"〜て くれます", uz:"'(menga) ... qilib beradi'", ex:{jp:"母が 料理を 作って くれました。", uz:"Onam ovqat pishirib berdi."}},
+    ],
+    vocab:[
+      {jp:"プレゼント",r:"purezento",uz:"sovgʻa"},{jp:"おみやげ",r:"omiyage",uz:"esdalik sovgʻasi"},
+      {jp:"カード",r:"kaado",uz:"kartochka, otkritka"},{jp:"はなたば",r:"hanataba",uz:"guldasta"},
+      {jp:"しょうたいします",r:"shoutai shimasu",uz:"taklif qilmoq"},
+      {jp:"おくります",r:"okurimasu",uz:"kuzatib qoʻymoq; joʻnatmoq"},
+      {jp:"おれいをいいます",r:"orei o iimasu",uz:"minnatdorchilik bildirmoq"},
+      {jp:"〜のに",r:"~no ni",uz:"... boʻlsa ham (kutilmagan natija)"},
+      {jp:"せっかく",r:"sekkaku",uz:"alohida/maxsus ravishda"},{jp:"つまらない",r:"tsumaranai",uz:"zerikarli, oddiy"},
+    ]},
+
+  { n:24, title:"Sifat feʻl", topic:"〜く/に なります / 〜く/に します",
+    grammar:[
+      {jp:"い-sifat く なります / な-sifat に なります", uz:"'... boʻldi' — oʻzgarish bildiradi", ex:{jp:"暖かく なりました。", uz:"Isildi (havo issiq boʻldi)."}},
+      {jp:"い-sifat く します / な-sifat に します", uz:"'... qildi' — oʻzgartirish bildiradi", ex:{jp:"部屋を きれいに します。", uz:"Xonani toza qilaman."}},
+      {jp:"〜く て / 〜で (sifat bogʻlovchi)", uz:"Sifatlarni bogʻlash", ex:{jp:"この 町は 静かで、きれいです。", uz:"Bu shahar tinch va chiroyli."}},
+    ],
+    vocab:[
+      {jp:"あたたかい",r:"atatakai",uz:"iliq"},{jp:"すずしい",r:"suzushii",uz:"salqin"},
+      {jp:"こんでいます",r:"konde imasu",uz:"gavjum, toʻla"},{jp:"すいています",r:"suite imasu",uz:"boʻsh, kam odam"},
+      {jp:"ふとります",r:"futorimasu",uz:"semirmoq"},{jp:"やせます",r:"yasemasu",uz:"ozmoq"},
+      {jp:"にゅういんします",r:"nyuuin shimasu",uz:"kasalxonaga yotmoq"},
+      {jp:"たいいんします",r:"taiin shimasu",uz:"kasalxonadan chiqmoq"},
+      {jp:"じこ",r:"jiko",uz:"falokat"},{jp:"けが",r:"kega",uz:"jarohат"},
+    ]},
+
+  { n:25, title:"Soʻzlashuv shakli", topic:"普通形会話 / 〜でしょう",
+    grammar:[
+      {jp:"Soʻzlashuv shakli (普通形)", uz:"Norasmiy suhbatda ishlatiladi — desu/masu tushib qoladi", ex:{jp:"「明日、来る?」「うん、行く。」", uz:"'Ertaga kelasanmi?' — 'Ha, boraman.'"}},
+      {jp:"〜でしょう", uz:"'... boʻlsa kerak' — taxmin bildiradi", ex:{jp:"明日は 晴れるでしょう。", uz:"Ertaga havo ochiq boʻlsa kerak."}},
+      {jp:"〜かもしれません", uz:"'... boʻlishi ham mumkin' — ehtimol", ex:{jp:"田中さんは もう 来たかも しれません。", uz:"Janob Tanaka kelgan boʻlishi ham mumkin."}},
+    ],
+    vocab:[
+      {jp:"ほんとう",r:"hontou",uz:"haqiqat, chindan"},{jp:"うそ",r:"uso",uz:"yolgʻon"},
+      {jp:"おかしい",r:"okashii",uz:"kulgili"},{jp:"むずかしい",r:"muzukashii",uz:"qiyin"},
+      {jp:"かんたん",r:"kantan",uz:"oson"},{jp:"たのしい",r:"tanoshii",uz:"qiziqarli, zavqli"},
+      {jp:"やさしい",r:"yasashii",uz:"mehribon; oson"},{jp:"すごい",r:"sugoi",uz:"ajoyib, zoʻr"},
+      {jp:"すばらしい",r:"subarashii",uz:"hayratlanarli"},{jp:"〜でしょう",r:"~deshou",uz:"... boʻlsa kerak"},
+    ]},
+
+  // ── KITOB 2 ──
+  { n:26, title:"んです", topic:"FEʻL/い-SIFAT/な-SIFAT + んです",
+    grammar:[
+      {jp:"〜んです / 〜んですか", uz:"Tushuntirish yoki sabab soʻrash uchun ishlatiladi", ex:{jp:"頭が 痛いんです。", uz:"Boshim ogʻriyapti (shuning uchun...)."}},
+      {jp:"FEʻL て いただけませんか", uz:"'... qilib bera olmaysizmi?' — xushmuomalalik bilan soʻrash", ex:{jp:"もう 一度 言って いただけませんか。", uz:"Bir daha ayta olmaysizmi?"}},
+      {jp:"FEʻL た-shakli ら いいですか", uz:"'... qilsam boʻladimi?' — maslahat soʻrash", ex:{jp:"どこに 行ったら いいですか。", uz:"Qayerga borsam boʻladi?"}},
+    ],
+    vocab:[
+      {jp:"かぜをひきます",r:"kaze o hikimasu",uz:"shamollash"},{jp:"ねつがあります",r:"netsu ga arimasu",uz:"harorat bor"},
+      {jp:"びょうき",r:"byouki",uz:"kasallik"},{jp:"くすり",r:"kusuri",uz:"dori"},
+      {jp:"のどがいたい",r:"nodo ga itai",uz:"tomoq ogʻrimoq"},{jp:"はがいたい",r:"ha ga itai",uz:"tish ogʻrimoq"},
+      {jp:"いしゃにいく",r:"isha ni iku",uz:"shifokorga bormoq"},{jp:"やすむ",r:"yasumu",uz:"dam olmoq"},
+      {jp:"しんぱい",r:"shinpai",uz:"tashvish"},{jp:"だいじょうぶ",r:"daijoubu",uz:"yaxshi, muammo yoʻq"},
+    ]},
+
+  { n:27, title:"Modal feʻllar", topic:"〜ことができます / 見えます/聞こえます",
+    grammar:[
+      {jp:"FEʻL(lugʻat) こと が できます", uz:"'... qila olaman' — qobiliyat bildiradi", ex:{jp:"私は 日本語を 話すことが できます。", uz:"Men yaponcha gapira olaman."}},
+      {jp:"見えます / 聞こえます", uz:"'Koʻrinmoqda / Eshitilyapti' — tabiiy holat", ex:{jp:"ここから 山が 見えます。", uz:"Bu yerdan tog' koʻrinadi."}},
+      {jp:"できます (narsa)", uz:"'Qila olmoq / tayyor boʻlmoq'", ex:{jp:"もうすぐ 料理が できます。", uz:"Ovqat yaqinda tayyor boʻladi."}},
+    ],
+    vocab:[
+      {jp:"うたいます",r:"utaimasu",uz:"qoʻshiq aytmoq"},{jp:"おどります",r:"odorimasu",uz:"raqsga tushmoq"},
+      {jp:"ピアノをひきます",r:"piano o hikimasu",uz:"pianino chalmoq"},{jp:"えをかきます",r:"e o kakimasu",uz:"rasm chizmoq"},
+      {jp:"みえます",r:"miemasu",uz:"koʻrinmoq"},{jp:"きこえます",r:"kikoemasu",uz:"eshitilyapti"},
+      {jp:"〜しか〜ません",r:"~shika ~masen",uz:"faqat (inkor bilan)"},{jp:"は(tematik)",r:"wa",uz:"mavzu yuklamasi (kontrast)"},
+      {jp:"も(taʻkid)",r:"mo",uz:"ham"},{jp:"まだ",r:"mada",uz:"hali, hozircha"},
+    ]},
+
+  { n:28, title:"Bir vaqtda", topic:"〜ながら / 〜て います / それに/それで",
+    grammar:[
+      {jp:"FEʻL1 ながら FEʻL2", uz:"'... qilar ekan ... qilmoq' — bir vaqtda ikkita ish", ex:{jp:"音楽を 聞きながら、勉強します。", uz:"Musiqa tinglar ekan, dars qilaman."}},
+      {jp:"〜て います (ishi, holat)", uz:"Doimiy holat yoki mashgʻulot bildirish", ex:{jp:"彼は 銀行に 勤めています。", uz:"U bankda ishlaydi."}},
+      {jp:"それに / それで", uz:"'Bundan tashqari / Shuning uchun'", ex:{jp:"雨です。それに、寒いです。", uz:"Yomgʻir yogʻyapti. Bundan tashqari, sovuq."}},
+    ],
+    vocab:[
+      {jp:"ながら",r:"nagara",uz:"... qilar ekan"},{jp:"やめます",r:"yamemasu",uz:"toʻxtatmoq, tashlab yubormoq"},
+      {jp:"つかいます",r:"tsukaimasu",uz:"ishlatmoq"},{jp:"つとめます",r:"tsutomemasu",uz:"xizmat qilmoq"},
+      {jp:"それに",r:"sore ni",uz:"bundan tashqari"},{jp:"それで",r:"sore de",uz:"shuning uchun"},
+      {jp:"それから",r:"sore kara",uz:"soʻngra, undan keyin"},{jp:"でも",r:"demo",uz:"lekin, ammo"},
+      {jp:"だから",r:"dakara",uz:"shuning uchun"},{jp:"きっと",r:"kitto",uz:"albatta (taxmin)"},
+    ]},
+
+  { n:29, title:"Te-shakl 3", topic:"〜てしまう / 〜ておく / どこかで/どこかに",
+    grammar:[
+      {jp:"FEʻL て しまう", uz:"Tugatish yoki afsuslanishni bildiradi", ex:{jp:"全部 食べて しまいました。", uz:"Hammasini yeb qoʻydim."}},
+      {jp:"FEʻL て おく", uz:"Keyingi uchun oldindan tayyorlash", ex:{jp:"切符を 買って おきます。", uz:"Chiptani oldindan sotib olaman."}},
+      {jp:"どこかで / どこかに / どこにも", uz:"'biror yerda / biror yerga / hech qayerga'", ex:{jp:"どこかで 会いましたか。", uz:"Biror yerda uchrashdikmi?"}},
+    ],
+    vocab:[
+      {jp:"わすれます",r:"wasuremasu",uz:"unutmoq"},{jp:"なくします",r:"nakushimasu",uz:"yoʻqotmoq"},
+      {jp:"こわします",r:"kowashimasu",uz:"buzmoq"},{jp:"みつけます",r:"mitsukemasu",uz:"topmoq"},
+      {jp:"どこかで",r:"doko ka de",uz:"biror yerda"},{jp:"どこかに",r:"doko ka ni",uz:"biror yerga"},
+      {jp:"どこにも",r:"doko ni mo",uz:"hech qayerga (inkor)"},{jp:"まだ〜ていません",r:"mada ~te imasen",uz:"hali ... qilinmagan"},
+      {jp:"もう〜てしまいました",r:"mou ~te shimaimashita",uz:"allaqachon qilib qoʻydim"},
+      {jp:"ありました",r:"arimashita",uz:"bor edi / topildi"},
+    ]},
+
+  { n:30, title:"Te-shakl 4", topic:"〜てある / 〜ておく / まだ/もう",
+    grammar:[
+      {jp:"FEʻL て あります", uz:"'... qilib qoʻyilgan' — oldindan qilingan holat", ex:{jp:"窓が 開けて あります。", uz:"Deraza (oldindan) ochib qoʻyilgan."}},
+      {jp:"FEʻL て おきます", uz:"Keyinchаlik uchun tayyorlash", ex:{jp:"予約して おきます。", uz:"Band qilib qoʻyaman."}},
+      {jp:"まだ / もう", uz:"'hali ... emas' / 'allaqachon'", ex:{jp:"もう 食べましたか — いいえ、まだです。", uz:"Allaqachon yedingizmi? — Yoʻq, hali."}},
+    ],
+    vocab:[
+      {jp:"かざります",r:"kazarimasu",uz:"bezatmoq"},{jp:"かけます",r:"kakemasu",uz:"ilib qoʻymoq"},
+      {jp:"ならびます",r:"narabimasu",uz:"qatorda turmoq"},{jp:"みがきます",r:"migakimasu",uz:"tozalamoq, tishlarni yuvmoq"},
+      {jp:"りょかん",r:"ryokan",uz:"yapon uslubidagi mehmonxona"},{jp:"まく",r:"maku",uz:"pardа"},
+      {jp:"かびん",r:"kabin",uz:"vazon"},{jp:"かべ",r:"kabe",uz:"devor"},
+      {jp:"てんじょう",r:"tenjou",uz:"ship (potolok)"},{jp:"ゆか",r:"yuka",uz:"pol"},
+    ]},
+
+  { n:31, title:"Maqsad shakli", topic:"〜ために / 〜つもりです / 予定です",
+    grammar:[
+      {jp:"FEʻL(lugʻat) ために", uz:"'... uchun / maqsadida'", ex:{jp:"日本語を 勉強するために、日本へ 来ました。", uz:"Yapon tilini oʻrganish uchun Yaponiyaga keldim."}},
+      {jp:"FEʻL つもりです", uz:"'... qilmoqchiman' — qatʻiy niyat", ex:{jp:"来年、結婚する つもりです。", uz:"Kelasi yil uylanmoqchiman."}},
+      {jp:"FEʻL 予定 です", uz:"'... rejasi bor' — aniq reja", ex:{jp:"来月、出張の 予定です。", uz:"Kelasi oyda xizmat safarim bor."}},
+    ],
+    vocab:[
+      {jp:"けいかく",r:"keikaku",uz:"reja"},{jp:"よてい",r:"yotei",uz:"jadval, reja"},
+      {jp:"つもり",r:"tsumori",uz:"niyat"},{jp:"もくひょう",r:"mokuhyou",uz:"maqsad"},
+      {jp:"ゆめ",r:"yume",uz:"orzu, tush"},{jp:"しょうらい",r:"shōrai",uz:"kelajak"},
+      {jp:"がんばります",r:"ganbarimasu",uz:"harakat qilmoq, tirishmoq"},
+      {jp:"あきらめます",r:"akiraremasu",uz:"voz kechmoq"},{jp:"つづけます",r:"tsuzukemasu",uz:"davom ettirmoq"},
+      {jp:"〜こ〜そ",r:"~ko~so",uz:"aynan shu / mana shu"},
+    ]},
+
+  { n:32, title:"Maslahat", topic:"〜た-shakли ほうがいいです / でしょう / かもしれません",
+    grammar:[
+      {jp:"FEʻL た ほうがいいです", uz:"'... qilgan maʻqul' — tavsiya", ex:{jp:"早く 寝たほうが いいです。", uz:"Erta yotgan maʻqul."}},
+      {jp:"FEʻL ない ほうがいいです", uz:"'... qilmaslik maʻqul'", ex:{jp:"お酒を 飲まないほうが いいですよ。", uz:"Spirtli ichimlik ichmaslik maʻqul."}},
+      {jp:"〜かもしれません", uz:"'... boʻlishi mumkin' — kuchsiz taxmin", ex:{jp:"明日は 雨かも しれません。", uz:"Ertaga yomgʻir yogʻishi mumkin."}},
+    ],
+    vocab:[
+      {jp:"きけん",r:"kiken",uz:"xavfli"},{jp:"あんぜん",r:"anzen",uz:"xavfsiz"},
+      {jp:"ちゅうい",r:"chuui",uz:"ehtiyot boʻlish"},{jp:"きをつけます",r:"ki o tsukemasu",uz:"ehtiyot boʻlmoq"},
+      {jp:"かならず",r:"kanarazu",uz:"albatta, muqarrar"},{jp:"きっと",r:"kitto",uz:"albatta (taxmin)"},
+      {jp:"たぶん",r:"tabun",uz:"balki, ehtimol"},{jp:"もしかしたら",r:"moshikashitara",uz:"ehtimolki"},
+      {jp:"おそらく",r:"osoraku",uz:"ehtimol (rasmiy)"},{jp:"〜心配なこと",r:"shinpai na koto",uz:"tashvishli narsa"},
+    ]},
+
+  { n:33, title:"Soʻzdan ibora", topic:"〜と読みます/と書きます / と言う意味です",
+    grammar:[
+      {jp:"〜と 読みます / 〜と 書きます", uz:"'... deb oʻqiladi / yoziladi'", ex:{jp:"これは 「山」と 書いて、「やま」と 読みます。", uz:"Bu '山' deb yozilib, 'yama' deb oʻqiladi."}},
+      {jp:"〜と いう 意味です", uz:"'... degan maʻnosi bor'", ex:{jp:"「ありがとう」は 感謝の言葉と いう 意味です。", uz:"'Arigatou' minnatdorchilik soʻzi degan maʻno."}},
+      {jp:"〜と 言って いました", uz:"'... dedi / aytdi'", ex:{jp:"田中さんは 来ないと 言って いました。", uz:"Janob Tanaka kelmayman dedi."}},
+    ],
+    vocab:[
+      {jp:"〜によると",r:"~ni yoru to",uz:"... ga koʻra"},{jp:"ということです",r:"to iu koto desu",uz:"... degan soʻz"},
+      {jp:"つまり",r:"tsumari",uz:"yaʻni, xulosa qilib"},{jp:"たとえば",r:"tatoeba",uz:"masalan"},
+      {jp:"いっぽう",r:"ippou",uz:"bir tomondan"},{jp:"しかし",r:"shikashi",uz:"lekin, ammo"},
+      {jp:"ただし",r:"tadashi",uz:"biroq, ammo"},{jp:"それに",r:"sore ni",uz:"bundan tashqari"},
+      {jp:"そのため",r:"sono tame",uz:"shuning uchun"},{jp:"したがって",r:"shitagatte",uz:"natijada"},
+    ]},
+
+  { n:34, title:"Shart 2", topic:"〜た-shakl とおりに / 〜あとで / 〜ないで",
+    grammar:[
+      {jp:"FEʻL た-shakl とおりに", uz:"'... deb aytilganidek, ... boʻyicha'", ex:{jp:"言ったとおりに、やって ください。", uz:"Aytilganidek qiling."}},
+      {jp:"FEʻL(lugʻat) OT の あとで", uz:"'... qilgandan keyin'", ex:{jp:"仕事の あとで、映画を 見ます。", uz:"Ishdan keyin kino koʻraman."}},
+      {jp:"FEʻL ないで FEʻL2", uz:"'... qilmasdan ... qilmoq'", ex:{jp:"朝ごはんを 食べないで、来ました。", uz:"Nonushta qilmasdan keldim."}},
+    ],
+    vocab:[
+      {jp:"せつめいします",r:"setsumei shimasu",uz:"tushuntirmoq"},{jp:"ほうこくします",r:"houkoku shimasu",uz:"hisobот bermoq"},
+      {jp:"しじします",r:"shiji shimasu",uz:"koʻrsatma bermoq"},{jp:"まにあいます",r:"ma ni aimasu",uz:"vaqtida yetib bormoq"},
+      {jp:"おくれます",r:"okuremasu",uz:"kechikmoq"},{jp:"けっか",r:"kekka",uz:"natija"},
+      {jp:"げんいん",r:"genʻin",uz:"sabab"},{jp:"りゆう",r:"riyuu",uz:"sababat"},
+      {jp:"もくてき",r:"mokuteki",uz:"maqsad"},{jp:"〜とおりに",r:"~toori ni",uz:"... boʻyicha"},
+    ]},
+
+  { n:35, title:"Ta-shakl 2", topic:"〜た-shapli まま / 〜ておく",
+    grammar:[
+      {jp:"FEʻL た まま / FEʻL ない まま", uz:"'... holda (oʻzgarmagan)' — holat davom etayotgani", ex:{jp:"窓を 開けたまま、寝て しまいました。", uz:"Derazani ochiq qoldirib uxlab qoldim."}},
+      {jp:"〜て おく (tayyorlash)", uz:"Keyingi uchun oldindan qilish", ex:{jp:"パーティーの 前に、料理を 作って おきます。", uz:"Bayramdan oldin ovqat tayyorlab qoʻyaman."}},
+      {jp:"〜ながら (qarama-qarshilik)", uz:"'... boʻla turib ham' — katta gapdagi qarama-qarshilik", ex:{jp:"お金が あり ながら、使いません。", uz:"Pul boʻla turib, ishlatmaydi."}},
+    ],
+    vocab:[
+      {jp:"まま",r:"mama",uz:"holda, oʻsha holatda"},{jp:"そのまま",r:"sono mama",uz:"oʻsha holda, shundayligicha"},
+      {jp:"つけたまま",r:"tsuketa mama",uz:"yoqib qoldirib"},{jp:"あけたまま",r:"aketa mama",uz:"ochiq holda"},
+      {jp:"わすれたまま",r:"wasureta mama",uz:"unutib qoldirib"},{jp:"だいたい",r:"daitai",uz:"asosan, taxminan"},
+      {jp:"ほとんど",r:"hotondo",uz:"deyarli"},{jp:"ぜんぶ",r:"zenbu",uz:"hammasi"},
+      {jp:"はっきり",r:"hakkiri",uz:"aniq, ravshan"},{jp:"しっかり",r:"shikkari",uz:"mustahkam, puxta"},
+    ]},
+
+  { n:36, title:"Yuklamalar", topic:"〜だけ / 〜しか〜ない / 〜ばかり",
+    grammar:[
+      {jp:"〜だけ", uz:"'faqat' — cheklov bildiradi (ijobiy gapda)", ex:{jp:"この 仕事は 私だけが できます。", uz:"Bu ishni faqat men qila olaman."}},
+      {jp:"〜しか〜ません", uz:"'faqat ... (boshqasi yoʻq)' — inkor bilan", ex:{jp:"お金が 100円しか ありません。", uz:"Faqat 100 iyena bor (xolos)."}},
+      {jp:"〜ばかり", uz:"'hamma ... / faqat ...' — bir narsani koʻp qilish", ex:{jp:"彼は ゲームばかり して います。", uz:"U faqat oʻyin oʻynaydi."}},
+    ],
+    vocab:[
+      {jp:"〜だけ",r:"~dake",uz:"faqat"},{jp:"〜しか〜ない",r:"~shika ~nai",uz:"faqat (inkor bilan)"},
+      {jp:"〜ばかり",r:"~bakari",uz:"hamma / faqat oʻsha narsani"},{jp:"〜ほど",r:"~hodo",uz:"... qadar, ... darajada"},
+      {jp:"〜くらい/ぐらい",r:"~kurai/gurai",uz:"taxminan, ... atrofida"},{jp:"〜さえ",r:"~sae",uz:"hatto, ... ham"},
+      {jp:"〜でも",r:"~demo",uz:"... ham (har holda)"},{jp:"〜こそ",r:"~koso",uz:"aynan, mana shu"},
+      {jp:"〜なんか/なんて",r:"~nanka/nante",uz:"... kabi narsalar (kamsitish)"},{jp:"〜ごろ",r:"~goro",uz:"taxminan (vaqt)"},
+    ]},
+
+  { n:37, title:"Passiv 2", topic:"受身形 — taʻsirlanish/taʻsir qilish",
+    grammar:[
+      {jp:"Passiv shakl (受身形)", uz:"Guruh 1: く→かれる, む→まれる; Guruh 2: る→られる", ex:{jp:"先生に 褒められました。", uz:"Oʻqituvchi tomonidan maqtalдim."}},
+      {jp:"Boshqa odamning harakatidan taʻsirlanish", uz:"'... qilindi' — salbiy taʻsir bildiradi", ex:{jp:"雨に 降られました。", uz:"Yomgʻirga uchradim (taʻsirlandim)."}},
+      {jp:"OT が 〜られます (imkoniyat)", uz:"'... qilish mumkin' — ikki funksiya", ex:{jp:"ここでは 英語が 話されています。", uz:"Bu yerda ingliz tilida gapirилади."}},
+    ],
+    vocab:[
+      {jp:"ほめられます",r:"homeraremasu",uz:"maqtalmoq"},{jp:"しかられます",r:"shikararemasu",uz:"tanбeh olmoq"},
+      {jp:"たのまれます",r:"tanomaremasu",uz:"iltimos qilinmoq"},{jp:"よばれます",r:"yobaremasu",uz:"chaqirilmoq"},
+      {jp:"つかわれます",r:"tsukawaremasu",uz:"ishlatilmoq"},{jp:"つくられます",r:"tsukuraremasu",uz:"yaratilmoq"},
+      {jp:"うまれます",r:"umaremasu",uz:"tugʻilmoq"},{jp:"よばれました",r:"yobaremashita",uz:"chaqirildi"},
+      {jp:"〜によって",r:"~ni yotte",uz:"... tomonidan; ... ga qarab"},{jp:"〜のに(contrast)",r:"~no ni",uz:"... boʻlsa ham"},
+    ]},
+
+  { n:38, title:"Saʻy-harakat", topic:"〜ようにします / 〜ようになります",
+    grammar:[
+      {jp:"FEʻL(lugʻat) ように します", uz:"'... qilishga harakat qilaman'", ex:{jp:"毎日 運動する ように します。", uz:"Har kuni mashq qilishga harakat qilaman."}},
+      {jp:"FEʻL ように なります", uz:"'... qila oladigan boʻldim' — oʻzgarish natijasi", ex:{jp:"日本語が 話せる ように なりました。", uz:"Yaponcha gapira oladigan boʻldim."}},
+      {jp:"〜ないように する", uz:"'... qilmaslikka harakat qilmoq'", ex:{jp:"遅刻しないように します。", uz:"Kechikmaslikka harakat qilaman."}},
+    ],
+    vocab:[
+      {jp:"〜ようにします",r:"~you ni shimasu",uz:"... qilishga harakat qilish"},{jp:"〜ようになります",r:"~you ni narimasu",uz:"... qiladigan boʻlmoq"},
+      {jp:"〜ことにします",r:"~koto ni shimasu",uz:"... qilishni qaror qilmoq"},{jp:"〜ことになります",r:"~koto ni narimasu",uz:"... boʻladi (qaror)"},
+      {jp:"れんしゅうします",r:"renshuu shimasu",uz:"mashq qilmoq"},{jp:"つづけます",r:"tsuzukemasu",uz:"davom ettirmoq"},
+      {jp:"きめます",r:"kimemasu",uz:"qaror qilmoq"},{jp:"めざします",r:"mezashimasu",uz:"maqsad qilmoq"},
+      {jp:"どりょくします",r:"doryoku shimasu",uz:"gʻayrat qilmoq"},{jp:"じょじょに",r:"jojo ni",uz:"asta-sekin"},
+    ]},
+
+  { n:39, title:"Majhul feʻl", topic:"使役形 — 〜させます",
+    grammar:[
+      {jp:"Majhul shakl (使役形): させます", uz:"'... qildirmoq' — kimnidir biror narsa qildirish", ex:{jp:"子どもに 野菜を 食べさせます。", uz:"Bolaga sabzavot yegizaman."}},
+      {jp:"〜させて いただけませんか", uz:"'... qilsam boʻladimi?' — oʻta xushmuomalalik", ex:{jp:"早退させて いただけませんか。", uz:"Erta ketib qolsam boʻladimi?"}},
+      {jp:"〜させて ください", uz:"'... qilishimga ijozat bering'", ex:{jp:"私にも 説明させて ください。", uz:"Menga ham tushuntirib berishga ijozat bering."}},
+    ],
+    vocab:[
+      {jp:"〜させます",r:"~sasemasu",uz:"... qildirmoq"},{jp:"〜させてください",r:"~sasete kudasai",uz:"... qilishimga ijozat bering"},
+      {jp:"〜いただけますか",r:"~itadakemasu ka",uz:"... qilib bera olasizmi?"},{jp:"けんきゅうします",r:"kenkyuu shimasu",uz:"tadqiqot qilmoq"},
+      {jp:"はっぴょうします",r:"happyou shimasu",uz:"eʻlon qilmoq, taqdim etmoq"},{jp:"ほうこくします",r:"houkoku shimasu",uz:"hisobot bermoq"},
+      {jp:"しりょう",r:"shiryou",uz:"maʻlumot, material"},{jp:"けいかく",r:"keikaku",uz:"reja"},
+      {jp:"すいせん",r:"suisen",uz:"tavsiya"},{jp:"もうしわけありません",r:"moushiwake arimasen",uz:"juda kechirasiz"},
+    ]},
+
+  { n:40, title:"Majhul+Passiv", topic:"使役受身形 + Murakkab shakllar",
+    grammar:[
+      {jp:"使役受身形 (〜させられます)", uz:"'... qilishga majbur boʻlmoq' — majbur qilinish", ex:{jp:"上司に 残業させられました。", uz:"Boshliq tomonidan qoʻshimcha ishlashga majbur boʻldim."}},
+      {jp:"〜と いう / 〜と いった OT", uz:"'... deyiluvchi / ... nomlangan'", ex:{jp:"「もったいない」という 言葉があります。", uz:"'Mottainai' deyiladigan soʻz bor."}},
+      {jp:"〜ように 言います", uz:"'... qilishini aytmoq'", ex:{jp:"先生は 静かに するように 言いました。", uz:"Oʻqituvchi jimlik boʻlishini aytdi."}},
+    ],
+    vocab:[
+      {jp:"〜させられます",r:"~saseraremasu",uz:"... qilishga majbur boʻlmoq"},{jp:"〜ように言います",r:"~you ni iimasu",uz:"... qilishini aytmoq"},
+      {jp:"〜というOT",r:"~to iu OT",uz:"... deyiluvchi OT"},{jp:"おもいやり",r:"omoiyari",uz:"mehr-shafqat, eʻtibor"},
+      {jp:"そんけいします",r:"sonkei shimasu",uz:"hurmat qilmoq"},{jp:"かんしゃします",r:"kansha shimasu",uz:"minnatdor boʻlmoq"},
+      {jp:"あやまります",r:"ayamarimasu",uz:"kechirim soʻramoq"},{jp:"ほめます",r:"homemasu",uz:"maqtamoq"},
+      {jp:"はげまします",r:"hagemashimasu",uz:"ragʻbatlantirilmoq"},{jp:"しつれいします",r:"shitsurei shimasu",uz:"xayr (rasmiy)"},
+    ]},
+];
+
+// ════════════════════════════════════════
+// STATE
+// ════════════════════════════════════════
+let state = {
+  curLesson: parseInt(localStorage.getItem('curLesson') || '1'),
+  completedLessons: JSON.parse(localStorage.getItem('completedLessons') || '[]'),
+  streak: parseInt(localStorage.getItem('streak') || '0'),
+  lastStudyDate: localStorage.getItem('lastStudyDate') || '',
+  todayDone: JSON.parse(localStorage.getItem('todayDone') || '[]'),
+  weeklyXp: JSON.parse(localStorage.getItem('weeklyXp') || '[0,0,0,0,0,0,0]'),
+  totalXp: parseInt(localStorage.getItem('totalXp') || '0'),
+};
+
+function saveState() {
+  localStorage.setItem('curLesson', state.curLesson);
+  localStorage.setItem('completedLessons', JSON.stringify(state.completedLessons));
+  localStorage.setItem('streak', state.streak);
+  localStorage.setItem('lastStudyDate', state.lastStudyDate);
+  localStorage.setItem('todayDone', JSON.stringify(state.todayDone));
+  localStorage.setItem('weeklyXp', JSON.stringify(state.weeklyXp));
+  localStorage.setItem('totalXp', state.totalXp);
+}
+
+// ════════════════════════════════════════
+// TABS
+// ════════════════════════════════════════
+function showTab(id) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ════════════════════════════════════════
+// TODAY PANEL
+// ════════════════════════════════════════
+const TASKS = [
+  { id:"vocab", icon:"📚", label:"So\u02BBz lug\u02BBati", desc:() => `${curLessonData().n}-dars: ${curLessonData().vocab.length} ta yangi so\u02BBz`, cls:"vocab", pill:"new" },
+  { id:'grammar', icon:'文', label:'Grammatika', desc:() => `${curLessonData().grammar.length} ta qoida takrorlash`, cls:'grammar', pill:'review' },
+  { id:'flash', icon:'⚡', label:'Kartochkalar', desc:'20 ta kartochka — tezkor takrorlash', cls:'vocab', pill:'review' },
+  { id:'quiz', icon:'✦', label:'Viktorina', desc:'10 savollik test', cls:'quiz', pill:'new' },
+  { id:'prev', icon:'🔁', label:'Oldingi darslar', desc:"1-5-dars sozlari takrorlash", cls:'writing', pill:'review' },
+];
+
+function curLessonData() {
+  return LESSONS.find(l => l.n === state.curLesson) || LESSONS[0];
+}
+
+function renderToday() {
+  updateStreak();
+  document.getElementById('streak-num').textContent = state.streak;
+  updateProgress();
+
+  const h = new Date().getHours();
+  const greet = h < 12 ? 'Xayrli tong! 🌅' : h < 17 ? 'Xayrli kun! 🌿' : 'Xayrli kech! 🌙';
+  document.getElementById('day-greeting').textContent = greet;
+  document.getElementById('day-subtext').textContent = `${curLessonData().n}-dars: ${curLessonData().title} — Bugungi mashqlar`;
+  document.getElementById('today-done').textContent = state.todayDone.length;
+  document.getElementById('today-total').textContent = TASKS.length;
+  document.getElementById('today-xp').textContent = state.todayDone.length * 20;
+
+  const grid = document.getElementById('task-grid');
+  grid.innerHTML = '';
+  TASKS.forEach(t => {
+    const done = state.todayDone.includes(t.id);
+    const card = document.createElement('div');
+    card.className = 'task-card' + (done ? ' done' : '');
+    card.innerHTML = `
+      <div class="task-icon ${t.cls}">${t.icon}</div>
+      <div class="task-info">
+        <h3>${t.label}</h3>
+        <p>${typeof t.desc === 'function' ? t.desc() : t.desc}</p>
+      </div>
+      ${!done ? `<span class="task-pill ${t.pill === 'new' ? 'pill-new' : 'pill-review'}">${t.pill === 'new' ? 'Yangi' : 'Takror'}</span>` : ''}
+      <div class="task-check">${done ? '✓' : ''}</div>
+    `;
+    card.onclick = () => completeTask(t.id, card);
+    grid.appendChild(card);
+  });
+
+  // Quick lesson select
+  const ql = document.getElementById('quick-lesson-select');
+  ql.innerHTML = '';
+  for(let i = 1; i <= 40; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'book-badge' + (i === state.curLesson ? ' active' : '');
+    btn.textContent = i + '-d';
+    btn.onclick = () => {
+      state.curLesson = i; saveState();
+      document.querySelectorAll('#quick-lesson-select .book-badge').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderToday();
+    };
+    ql.appendChild(btn);
+  }
+
+  renderWeekBars();
+}
+
+function completeTask(id, card) {
+  if(state.todayDone.includes(id)) return;
+  state.todayDone.push(id);
+  state.totalXp += 20;
+  saveState();
+  card.classList.add('done', 'just-done');
+  card.querySelector('.task-check').textContent = '✓';
+  card.querySelector('.task-check').style.background = 'var(--primary)';
+  card.querySelector('.task-check').style.borderColor = 'var(--primary)';
+  card.querySelector('.task-check').style.color = 'white';
+  document.getElementById('today-done').textContent = state.todayDone.length;
+  document.getElementById('today-xp').textContent = state.todayDone.length * 20;
+  updateProgress();
+}
+
+function updateStreak() {
+  const today = new Date().toDateString();
+  if(state.lastStudyDate !== today) {
+    const yest = new Date(); yest.setDate(yest.getDate()-1);
+    if(state.lastStudyDate !== yest.toDateString()) state.streak = 0;
+    state.todayDone = [];
+    state.lastStudyDate = today;
+    saveState();
+  }
+}
+
+function updateProgress() {
+  const done = state.completedLessons.length;
+  const pct = Math.round((done/40)*100);
+  document.getElementById('progress-pct').textContent = pct + '%';
+  document.getElementById('progress-fill').style.width = pct + '%';
+}
+
+function renderWeekBars() {
+  const days = ['Du', 'Se', 'Ch', 'Pa', 'Ju', 'Sh', 'Ya'];
+  const bars = document.getElementById('week-bars');
+  const labels = document.getElementById('week-labels');
+  const max = Math.max(...state.weeklyXp, 1);
+  bars.innerHTML = '';
+  labels.innerHTML = '';
+  const today = new Date().getDay();
+  state.weeklyXp.forEach((xp, i) => {
+    const h = Math.max(4, Math.round((xp/max)*72));
+    const isToday = i === (today + 6) % 7;
+    const bar = document.createElement('div');
+    bar.style.cssText = `flex:1;height:${h}px;border-radius:4px 4px 0 0;background:${isToday ? 'var(--primary)' : xp ? '#a5d6a7' : '#e0e0e0'};transition:height 0.4s ease;`;
+    bars.appendChild(bar);
+    const lbl = document.createElement('div');
+    lbl.style.cssText = `flex:1;text-align:center;font-size:0.6rem;color:var(--text3);`;
+    lbl.textContent = days[i];
+    labels.appendChild(lbl);
+  });
+}
+
+// ════════════════════════════════════════
+// LESSONS PANEL
+// ════════════════════════════════════════
+let curBook = 1, curLessonView = 1, curLessonTab = 'vocab';
+
+function renderLessonGrid() {
+  const grid = document.getElementById('lesson-grid');
+  grid.innerHTML = '';
+  const range = curBook === 1 ? LESSONS.slice(0,25) : LESSONS.slice(25,40);
+  range.forEach(l => {
+    const btn = document.createElement('button');
+    const done = state.completedLessons.includes(l.n);
+    btn.className = 'lesson-btn' + (l.n === curLessonView ? ' active' : '') + (done ? ' completed' : '');
+    btn.innerHTML = `<span>${l.n}</span><span class="sub">${l.title.split(' ')[0]}</span>`;
+    btn.onclick = () => { curLessonView = l.n; renderLessonGrid(); showLessonDetail(l.n); };
+    grid.appendChild(btn);
+  });
+}
+
+function showLessonDetail(n) {
+  const lesson = LESSONS.find(l => l.n === n);
+  if(!lesson) return;
+  const el = document.getElementById('lesson-detail');
+  el.innerHTML = `
+    <div class="lesson-detail-header">
+      <div>
+        <h3>${lesson.n}-dars: ${lesson.title}</h3>
+        <p>${lesson.topic}</p>
+      </div>
+      <button onclick="markLessonDone(${lesson.n})" style="background:rgba(255,255,255,0.2);border:none;color:white;padding:6px 14px;border-radius:20px;font-size:0.72rem;font-weight:700;cursor:pointer;font-family:Inter,sans-serif;">
+        ${state.completedLessons.includes(n) ? '✓ Tugallandi' : '✓ Tugatish'}
+      </button>
+    </div>
+    <div class="lesson-tabs">
+      <button class="lesson-tab active" onclick="showLessonTab('vocab',this)">Soʻzlar</button>
+      <button class="lesson-tab" onclick="showLessonTab('grammar',this)">Grammatika</button>
+    </div>
+    <div class="lesson-tab-content active" id="lt-vocab">
+      <table class="vocab-table">
+        <thead><tr><th>Yaponcha</th><th>Oʻqilish</th><th>Oʻzbekcha</th></tr></thead>
+        <tbody>
+          ${lesson.vocab.map(v => `<tr>
+            <td><span class="jp-word">${v.jp}</span></td>
+            <td><span class="reading">${v.r}</span></td>
+            <td>${v.uz}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+    <div class="lesson-tab-content" id="lt-grammar">
+      ${lesson.grammar.map((g,i) => `
+        <div class="grammar-card">
+          <h4>${i+1}. ${g.jp}</h4>
+          <p>${g.uz}</p>
+          ${g.ex ? `<div class="grammar-example">
+            <div class="jp">${g.ex.jp}</div>
+            <div class="uz">${g.ex.uz}</div>
+          </div>` : ''}
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function showLessonTab(tab, btn) {
+  document.querySelectorAll('.lesson-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.lesson-tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('lt-' + tab).classList.add('active');
+}
+
+function markLessonDone(n) {
+  if(!state.completedLessons.includes(n)) {
+    state.completedLessons.push(n);
+    saveState();
+    renderLessonGrid();
+    showLessonDetail(n);
+    updateProgress();
+  }
+}
+
+function setBook(b, btn) {
+  curBook = b;
+  document.querySelectorAll('.book-badge').forEach(x => x.classList.remove('active'));
+  btn.classList.add('active');
+  renderLessonGrid();
+}
+
+// ════════════════════════════════════════
+// FLASHCARDS
+// ════════════════════════════════════════
+let fcDeck = [], fcIdx = 0, fcKnow = 0, fcUnknow = 0, fcFlipped = false;
+
+function buildFcDeck(range) {
+  let lessons;
+  if(range === 'book1') lessons = LESSONS.slice(0,25);
+  else if(range === 'book2') lessons = LESSONS.slice(25,40);
+  else if(range === 'cur') lessons = [LESSONS.find(l => l.n === state.curLesson) || LESSONS[0]];
+  else lessons = LESSONS.slice(0,40);
+
+  fcDeck = [];
+  lessons.forEach(l => l.vocab.forEach(v => fcDeck.push({...v, lesson: l.n})));
+  fcDeck = fcDeck.sort(() => Math.random() - 0.5);
+  fcIdx = 0; fcKnow = 0; fcUnknow = 0;
+  renderFC();
+}
+
+function setFcRange(r, btn) {
+  document.querySelectorAll('.fc-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  buildFcDeck(r);
+}
+
+function renderFC() {
+  if(!fcDeck.length) return;
+  const card = fcDeck[fcIdx];
+  document.getElementById('fc-char').textContent = card.jp;
+  document.getElementById('fc-reading').textContent = card.r;
+  document.getElementById('fc-meaning').textContent = card.uz;
+  document.getElementById('fc-extra').textContent = card.r + ' — ' + card.lesson + '-dars';
+  document.getElementById('fc-idx').textContent = fcIdx + 1;
+  document.getElementById('fc-total').textContent = fcDeck.length;
+  const fc = document.getElementById('flashcard');
+  fc.classList.remove('flipped');
+  fcFlipped = false;
+}
+
+function flipFC() {
+  fcFlipped = !fcFlipped;
+  document.getElementById('flashcard').classList.toggle('flipped', fcFlipped);
+}
+
+function fcAnswer(knew) {
+  if(knew) { fcKnow++; document.getElementById('fc-know').textContent = fcKnow; }
+  else { fcUnknow++; document.getElementById('fc-unknow').textContent = fcUnknow; }
+  fcIdx = (fcIdx + 1) % fcDeck.length;
+  renderFC();
+}
+
+// ════════════════════════════════════════
+// QUIZ
+// ════════════════════════════════════════
+let qDeck = [], qIdx = 0, qRight = 0, qWrong = 0, qTotal = 0;
+
+function buildQuizDeck(range) {
+  let lessons;
+  if(range === 'book1') lessons = LESSONS.slice(0,25);
+  else if(range === 'book2') lessons = LESSONS.slice(25,40);
+  else lessons = LESSONS.slice(0,40);
+
+  qDeck = [];
+  lessons.forEach(l => l.vocab.forEach(v => qDeck.push({...v, lesson: l.n})));
+  qDeck = qDeck.sort(() => Math.random() - 0.5);
+  qIdx = 0; qRight = 0; qWrong = 0; qTotal = 0;
+  updateQScores();
+  renderQuiz();
+}
+
+function setQuizRange(r, btn) {
+  document.querySelectorAll('#tab-quiz .fc-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  buildQuizDeck(r);
+}
+
+function updateQScores() {
+  document.getElementById('q-right').textContent = qRight;
+  document.getElementById('q-wrong').textContent = qWrong;
+  document.getElementById('q-total').textContent = qTotal;
+}
+
+function renderQuiz() {
+  if(!qDeck.length) return;
+  const item = qDeck[qIdx];
+  const types = [0,1]; // 0=jp→uz, 1=uz→jp
+  const type = types[Math.floor(Math.random()*2)];
+  document.getElementById('q-type').textContent = type === 0 ? 'Oʻzbekcha maʻnosini toping' : 'Yaponcha shaklini toping';
+  document.getElementById('q-char').textContent = type === 0 ? item.jp : item.uz;
+  document.getElementById('q-hint').textContent = type === 0 ? item.r : '';
+  document.getElementById('q-feedback').textContent = 'Toʻg\'ri javobni tanlang';
+  document.getElementById('q-feedback').className = 'q-feedback';
+  document.getElementById('q-next').style.display = 'none';
+
+  const pool = qDeck.filter((_,i) => i !== qIdx).sort(() => Math.random()-0.5).slice(0,3);
+  const choices = [...pool, item].sort(() => Math.random()-0.5);
+  const opts = document.getElementById('q-options');
+  opts.innerHTML = '';
+  choices.forEach(ch => {
+    const btn = document.createElement('button');
+    btn.className = 'q-opt';
+    btn.textContent = type === 0 ? ch.uz : ch.jp;
+    btn.onclick = function() {
+      const correct = type === 0 ? ch.uz === item.uz : ch.jp === item.jp;
+      document.querySelectorAll('.q-opt').forEach(b => b.disabled = true);
+      qTotal++;
+      if(correct) {
+        this.classList.add('correct');
+        qRight++;
+        document.getElementById('q-feedback').textContent = '✓ Toʻg\'ri! — ' + item.r;
+        document.getElementById('q-feedback').className = 'q-feedback correct';
+      } else {
+        this.classList.add('wrong');
+        qWrong++;
+        document.querySelectorAll('.q-opt').forEach(b => {
+          if((type === 0 ? b.textContent === item.uz : b.textContent === item.jp)) b.classList.add('correct');
+        });
+        document.getElementById('q-feedback').textContent = '✕ Javob: ' + (type === 0 ? item.uz : item.jp);
+        document.getElementById('q-feedback').className = 'q-feedback wrong';
+      }
+      updateQScores();
+      document.getElementById('q-next').style.display = 'block';
+    };
+    opts.appendChild(btn);
+  });
+}
+
+function nextQuiz() {
+  qIdx = (qIdx + 1) % qDeck.length;
+  renderQuiz();
+}
+
+// ════════════════════════════════════════
+// GRAMMAR PANEL
+// ════════════════════════════════════════
+function renderGrammar(filter) {
+  let lessons = filter === 'book1' ? LESSONS.slice(0,25) : filter === 'book2' ? LESSONS.slice(25) : LESSONS;
+  const list = document.getElementById('grammar-list');
+  list.innerHTML = '';
+  let gIdx = 0;
+  lessons.forEach(lesson => {
+    lesson.grammar.forEach(g => {
+      gIdx++;
+      const div = document.createElement('div');
+      div.className = 'gram-item';
+      div.innerHTML = `
+        <div class="gram-item-header" onclick="toggleGram(this)">
+          <div class="gram-num">${gIdx}</div>
+          <div class="gram-title">
+            <div class="jp">${g.jp}</div>
+            <div class="uz">${g.uz.substring(0,60)}${g.uz.length>60?'...':''}</div>
+          </div>
+          <span class="gram-lesson-tag">${lesson.n}-dars</span>
+          <span class="gram-arrow">▾</span>
+        </div>
+        <div class="gram-body">
+          <p>${g.uz}</p>
+          ${g.ex ? `<div class="gram-example-box">
+            <div class="jp">${g.ex.jp}</div>
+            <div class="uz">${g.ex.uz}</div>
+          </div>` : ''}
+        </div>
+      `;
+      list.appendChild(div);
+    });
+  });
+}
+
+function setGramFilter(f, btn) {
+  document.querySelectorAll('#tab-grammar .fc-filter').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderGrammar(f);
+}
+
+function toggleGram(header) {
+  header.parentElement.classList.toggle('open');
+}
+
+// ════════════════════════════════════════
+// INIT
+// ════════════════════════════════════════
+renderToday();
+renderLessonGrid();
+showLessonDetail(state.curLesson);
+buildFcDeck('all');
+buildQuizDeck('all');
+renderGrammar('all');
+</script>
+</body>
+</html>
